@@ -40,5 +40,7 @@ public class WondrousWildsConfig implements ConfigData {
 
         @ConfigEntry.Gui.Tooltip(count = 2)
         public boolean woodpeckersInteractWithBlocks = true;
+
+        public int woodpeckerBondingTaskInterval = 24000;
     }
 }

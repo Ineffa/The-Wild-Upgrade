@@ -35,7 +35,7 @@ public abstract class SpawnGroupMixin {
         var lastSpawnGroup = spawnGroups.get(spawnGroups.size() - 1);
         var internalPrefix = "WONDROUS_WILDS_";
 
-        var fireflies = newSpawnGroup(internalPrefix + "FIREFLIES", lastSpawnGroup.ordinal() + 1, "fireflies", 30, true, false, 64);
+        var fireflies = newSpawnGroup(internalPrefix + "FIREFLIES", lastSpawnGroup.ordinal() + 1, "fireflies", 15, true, false, 64);
         WondrousWildsSpawnGroups.FIREFLIES = fireflies;
         spawnGroups.add(fireflies);
 

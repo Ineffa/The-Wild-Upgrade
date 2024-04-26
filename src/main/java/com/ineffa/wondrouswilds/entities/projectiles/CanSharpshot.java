@@ -4,7 +4,7 @@ public interface CanSharpshot {
 
     boolean canLandSharpshot();
 
-    boolean hasRegisteredSharpshot();
+    boolean wondrouswilds$hasRegisteredSharpshot();
 
     void registerSharpshot();
 }

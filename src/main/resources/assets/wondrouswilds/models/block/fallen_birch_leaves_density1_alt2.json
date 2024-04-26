@@ -1,0 +1,19 @@
+{
+	"texture_size": [32, 32],
+	"textures": {
+		"texture": "wondrouswilds:block/fallen_birch_leaves",
+		"particle": "#texture"
+	},
+	"elements": [
+		{
+			"name": "northWestLeaves",
+			"from": [-0.5, 0.1, 0.25],
+			"to": [7.5, 0.1, 6.25],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [4, 0.1, 4]},
+			"faces": {
+				"up": {"uv": [3, 7, 0, 3], "rotation": 90, "texture": "#texture", "tintindex": 1},
+				"down": {"uv": [3, 3, 0, 7], "rotation": 270, "texture": "#texture", "cullface": "down", "tintindex": 1}
+			}
+		}
+	]
+}

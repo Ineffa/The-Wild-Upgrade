@@ -1,33 +1,20 @@
 {
   "values": [
-    "minecraft:bell",
-    "#minecraft:buttons",
+    "#wondrouswilds:woodpecker_bonding_blocks",
     "minecraft:cake",
     "#minecraft:campfires",
     "#minecraft:candle_cakes",
     "#minecraft:candles",
-    "#minecraft:cauldrons",
-    "minecraft:comparator",
-    "minecraft:composter",
     "#wondrouswilds:copper_blocks",
     "minecraft:crimson_fungus",
     "#minecraft:crops",
-    "minecraft:daylight_detector",
     "minecraft:dragon_egg",
     "minecraft:farmland",
-    "#minecraft:fence_gates",
-    "#minecraft:flower_pots",
     "minecraft:jukebox",
-    "minecraft:lever",
-    "minecraft:note_block",
     "minecraft:pumpkin",
-    "#minecraft:redstone_ores",
-    "minecraft:repeater",
     "#minecraft:saplings",
     "minecraft:sweet_berry_bush",
     "minecraft:tnt",
-    "minecraft:warped_fungus",
-    "#minecraft:wooden_doors",
-    "#minecraft:wooden_trapdoors"
+    "minecraft:warped_fungus"
   ]
 }

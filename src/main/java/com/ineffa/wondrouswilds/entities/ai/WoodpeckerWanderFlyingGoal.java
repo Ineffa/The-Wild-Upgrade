@@ -9,16 +9,15 @@ import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
-import java.util.Objects;
 
 public class WoodpeckerWanderFlyingGoal extends Goal {
 
     private final WoodpeckerEntity woodpecker;
 
     public WoodpeckerWanderFlyingGoal(WoodpeckerEntity woodpeckerEntity) {
-        this.setControls(EnumSet.of(Goal.Control.MOVE));
-
         this.woodpecker = woodpeckerEntity;
+
+        this.setControls(EnumSet.of(Goal.Control.MOVE));
     }
 
     @Override
@@ -49,13 +48,15 @@ public class WoodpeckerWanderFlyingGoal extends Goal {
 
     @Nullable
     private Vec3d getRandomLocation() {
-        boolean moveTowardsNest = this.woodpecker.hasNestPos() && !Objects.requireNonNull(this.woodpecker.getNestPos()).isWithinDistance(this.woodpecker.getPos(), this.woodpecker.getWanderRadiusFromNest());
+        BlockPos moveTowardsPos = this.woodpecker.getPosToWanderTowards();
+        boolean isMovingTowardsPos = moveTowardsPos != null;
+        Vec3d direction = isMovingTowardsPos ? Vec3d.ofCenter(moveTowardsPos).subtract(this.woodpecker.getPos()).normalize() : this.woodpecker.getRotationVec(0.0F);
 
-        Vec3d direction = moveTowardsNest ? Vec3d.ofCenter(this.woodpecker.getNestPos()).subtract(this.woodpecker.getPos()).normalize() : this.woodpecker.getRotationVec(0.0F);
+        int horizontalRange = isMovingTowardsPos ? 32 : 16;
 
-        Vec3d groundLocation = AboveGroundTargeting.find(this.woodpecker, 16, 8, direction.x, direction.z, 1.5707964F, this.woodpecker.wantsToLand() ? 1 : 6, 1);
+        Vec3d groundLocation = AboveGroundTargeting.find(this.woodpecker, horizontalRange, 8, direction.x, direction.z, 1.5707964F, this.woodpecker.wantsToLand() ? 1 : 6, 1);
         if (groundLocation != null) return groundLocation;
 
-        return NoPenaltySolidTargeting.find(this.woodpecker, 16, 8, -2, direction.x, direction.z, 1.5707963705062866D);
+        return NoPenaltySolidTargeting.find(this.woodpecker, horizontalRange, 8, -2, direction.x, direction.z, 1.5707963705062866D);
     }
 }

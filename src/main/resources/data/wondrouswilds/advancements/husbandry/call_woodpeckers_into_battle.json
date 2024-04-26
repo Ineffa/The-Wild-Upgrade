@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:goat_horn"
+    },
+    "title": {
+      "translate": "advancement.wondrouswilds.call_woodpeckers_into_battle.title"
+    },
+    "description": {
+      "translate": "advancement.wondrouswilds.call_woodpeckers_into_battle.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "wondrouswilds:husbandry/bond_with_woodpecker",
+  "criteria": {
+    "call_ten_woodpeckers_into_battle": {
+      "trigger": "wondrouswilds:called_ten_woodpeckers_into_battle"
+    }
+  }
+}

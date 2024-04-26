@@ -28,8 +28,7 @@ public class FireflyLandedOnHeadCriterion extends AbstractCriterion<FireflyLande
     }
 
     public void trigger(ServerPlayerEntity player, FireflyEntity firefly) {
-        LootContext lootContext = EntityPredicate.createAdvancementEntityLootContext(player, firefly);
-        this.trigger(player, conditions -> conditions.matches(lootContext));
+        this.trigger(player, conditions -> conditions.matches(EntityPredicate.createAdvancementEntityLootContext(player, firefly)));
     }
 
     public static class Conditions extends AbstractCriterionConditions {
@@ -38,14 +37,6 @@ public class FireflyLandedOnHeadCriterion extends AbstractCriterion<FireflyLande
         public Conditions(EntityPredicate.Extended player, EntityPredicate.Extended fireflyPredicate) {
             super(ID, player);
             this.fireflyPredicate = fireflyPredicate;
-        }
-
-        public static Conditions any() {
-            return new Conditions(EntityPredicate.Extended.EMPTY, EntityPredicate.Extended.EMPTY);
-        }
-
-        public static Conditions predicate(EntityPredicate.Extended fireflyPredicate) {
-            return new Conditions(EntityPredicate.Extended.EMPTY, fireflyPredicate);
         }
 
         public boolean matches(LootContext context) {

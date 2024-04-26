@@ -1,0 +1,46 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cooked_porkchop"
+    },
+    "title": {
+      "translate": "advancement.wondrouswilds.drill_em_and_grill_em.title"
+    },
+    "description": {
+      "translate": "advancement.wondrouswilds.drill_em_and_grill_em.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "wondrouswilds:husbandry/bond_with_woodpecker",
+  "criteria": {
+    "kill_burning_hoglin": {
+      "trigger": "wondrouswilds:companion_killed_entity",
+      "conditions": {
+        "companion": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "wondrouswilds:woodpecker"
+            }
+          }
+        ],
+        "entity_killed": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:hoglin",
+              "flags": {
+                "is_on_fire": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

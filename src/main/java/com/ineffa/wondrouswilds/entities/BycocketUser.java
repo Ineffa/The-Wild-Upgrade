@@ -4,7 +4,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 
 public interface BycocketUser {
 
-    boolean isAccurateWith(ProjectileEntity projectile);
+    boolean wondrouswilds$isAccurateWith(ProjectileEntity projectile);
 
-    boolean canSharpshotWith(ProjectileEntity projectile);
+    boolean wondrouswilds$canSharpshotWith(ProjectileEntity projectile);
 }

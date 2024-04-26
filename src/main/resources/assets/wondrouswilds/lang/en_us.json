@@ -1,7 +1,14 @@
 {
   "entity.wondrouswilds.firefly": "Firefly",
   "entity.wondrouswilds.woodpecker": "Woodpecker",
+  "entity.wondrouswilds.woodpecker.following_enabled": "%1$s is now following",
+  "entity.wondrouswilds.woodpecker.following_disabled": "%1$s is now wandering",
   "entity.wondrouswilds.chipmunk": "Chipmunk",
+  "entity.wondrouswilds.chipmunk.start_wandering": "%1$s is now wandering",
+  "entity.wondrouswilds.chipmunk.start_following": "%1$s is now following",
+  "entity.wondrouswilds.chipmunk.start_sitting": "%1$s is now sitting",
+
+  "effect.wondrouswilds.woodpeckers_warcry": "Woodpecker's Warcry",
 
   "block.wondrouswilds.purple_violet": "Violet",
   "block.wondrouswilds.pink_violet": "Pink Violet",
@@ -13,7 +20,9 @@
   "block.wondrouswilds.potted_white_violet": "Potted White Violet",
   "block.wondrouswilds.small_polypore": "Small Polypore",
   "block.wondrouswilds.big_polypore": "Big Polypore",
+  "block.wondrouswilds.bush": "Bush",
   "block.wondrouswilds.ivy": "Ivy",
+  "block.wondrouswilds.fallen_birch_leaves": "Fallen Birch Leaves",
   "block.wondrouswilds.yellow_birch_leaves": "Yellow Birch Leaves",
   "block.wondrouswilds.orange_birch_leaves": "Orange Birch Leaves",
   "block.wondrouswilds.red_birch_leaves": "Red Birch Leaves",
@@ -76,7 +85,7 @@
   "item.wondrouswilds.acorn": "Acorn",
   "item.wondrouswilds.woodpecker_crest_feather": "Woodpecker Crest Feather",
   "item.wondrouswilds.bodkin_arrow": "Bodkin Arrow",
-  "item.wondrouswilds.black_bycocket": "Black Bycocket",
+  "item.wondrouswilds.bycocket_woodpecker": "Bycocket",
   "item.wondrouswilds.scroll_of_secrets_nest_box": "Scroll of Secrets",
   "item.wondrouswilds.music_disc_avian": "Music Disc",
   "item.wondrouswilds.music_disc_avian.desc": "LudoCrypt - Avian",
@@ -88,7 +97,11 @@
 
   "itemGroup.wondrouswilds.wondrous_wilds": "Wondrous Wilds",
 
+  "enchantment.wondrouswilds.dexterity": "Dexterity",
   "enchantment.wondrouswilds.versatility": "Versatility",
+
+  "bycocket.flair": "Flair when worn:",
+  "bycocket.flair.wondrouswilds.woodpecker.title": "Sharpshot",
 
   "advancement.wondrouswilds.crawl_inside_hollow_log.title": "Extremely Claustrophobic",
   "advancement.wondrouswilds.crawl_inside_hollow_log.description": "Squeeze your way into a Hollow Log",
@@ -98,12 +111,18 @@
   "advancement.wondrouswilds.find_avian_music_disc.description": "Find a Woodpecker holding a rare music disc",
   "advancement.wondrouswilds.give_woodpecker_item.title": "Anything Is a Toy",
   "advancement.wondrouswilds.give_woodpecker_item.description": "Give a Woodpecker an item after gaining its trust",
+  "advancement.wondrouswilds.bond_with_woodpecker.title": "A Special Bond",
+  "advancement.wondrouswilds.bond_with_woodpecker.description": "Play along with a baby Woodpecker to gain its loyalty",
+  "advancement.wondrouswilds.call_woodpeckers_into_battle.title": "Call of a Thousand Pecks",
+  "advancement.wondrouswilds.call_woodpeckers_into_battle.description": "Use a Goat Horn to call at least ten loyal Woodpeckers into battle at once",
+  "advancement.wondrouswilds.drill_em_and_grill_em.title": "Drill ‘Em and Grill ‘Em",
+  "advancement.wondrouswilds.drill_em_and_grill_em.description": "Have a loyal Woodpecker kill a burning Hoglin",
   "advancement.wondrouswilds.obtain_woodpecker_crest_feather.title": "Bad Hair Day",
   "advancement.wondrouswilds.obtain_woodpecker_crest_feather.description": "Take a Woodpecker's shed crest feather",
   "advancement.wondrouswilds.obtain_nest_box.title": "Home Sweet Home",
   "advancement.wondrouswilds.obtain_nest_box.description": "Construct a Nest Box",
-  "advancement.wondrouswilds.sharpshot_kill.title": "Sharpshooter",
-  "advancement.wondrouswilds.sharpshot_kill.description": "Use a Bycocket to kill something with a sharpshot",
+  "advancement.wondrouswilds.kill_with_sharpshot.title": "Sharpshooter",
+  "advancement.wondrouswilds.kill_with_sharpshot.description": "Use a Bycocket to kill something with a sharpshot",
 
   "subtitles.wondrouswilds.entity.woodpecker.chirp": "Woodpecker chirps",
   "subtitles.wondrouswilds.entity.woodpecker.drum": "Woodpecker drums",
@@ -130,5 +149,6 @@
   "text.autoconfig.wondrouswilds.option.mobSettings.woodpeckersBuildNests.@Tooltip[1]": "This behavior is also controlled by the vanilla \"mobGriefing\" game rule",
   "text.autoconfig.wondrouswilds.option.mobSettings.woodpeckersInteractWithBlocks": "Woodpeckers interact with blocks",
   "text.autoconfig.wondrouswilds.option.mobSettings.woodpeckersInteractWithBlocks.@Tooltip[0]": "Whether Woodpeckers will try to interact/play with certain blocks",
-  "text.autoconfig.wondrouswilds.option.mobSettings.woodpeckersInteractWithBlocks.@Tooltip[1]": "The list of blocks that they can interact with is defined by the \"woodpeckers_interact_with\" block tag"
+  "text.autoconfig.wondrouswilds.option.mobSettings.woodpeckersInteractWithBlocks.@Tooltip[1]": "The list of blocks that they can interact with is defined by the \"woodpeckers_interact_with\" block tag",
+  "text.autoconfig.wondrouswilds.option.mobSettings.woodpeckerBondingTaskInterval": "Woodpecker bonding task interval"
 }

@@ -1,6 +1,8 @@
 {
   "values": [
     "#wondrouswilds:tree_hollows",
-    "#wondrouswilds:nest_boxes"
+    "#wondrouswilds:nest_boxes",
+    "wondrouswilds:bush",
+    "wondrouswilds:ivy"
   ]
 }

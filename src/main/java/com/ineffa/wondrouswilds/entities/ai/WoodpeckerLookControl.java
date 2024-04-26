@@ -15,6 +15,6 @@ public class WoodpeckerLookControl extends LookControl {
 
     @Override
     protected boolean shouldStayHorizontal() {
-        return !this.woodpecker.isPecking();
+        return !this.woodpecker.isPecking() && !this.woodpecker.isDrumming();
     }
 }

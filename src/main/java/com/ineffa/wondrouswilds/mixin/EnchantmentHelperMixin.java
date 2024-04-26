@@ -1,43 +1,36 @@
 package com.ineffa.wondrouswilds.mixin;
 
-import com.google.common.collect.Lists;
 import com.ineffa.wondrouswilds.enchantments.SimulatesCustomEnchantmentTarget;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
+import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Mixin(EnchantmentHelper.class)
 public class EnchantmentHelperMixin {
 
-    /**
-     * @author Ineffa
-     * @reason Required to add custom enchantment target functionality without the need for messy enum modification. Can hopefully be removed once Fabric API adds a proper way of doing such.
-     */
-    @Overwrite
-    public static List<EnchantmentLevelEntry> getPossibleEntries(int power, ItemStack stack, boolean treasureAllowed) {
-        ArrayList<EnchantmentLevelEntry> list = Lists.newArrayList();
+    @Unique
+    private static Enchantment enchantmentBeingChecked;
 
-        Item item = stack.getItem();
-        block0: for (Enchantment enchantment : Registry.ENCHANTMENT) {
-            // Simulates custom enchantment target behavior using an interface
-            if (enchantment.isTreasure() && !treasureAllowed || !enchantment.isAvailableForRandomSelection() || (!enchantment.type.isAcceptableItem(item) || enchantment instanceof SimulatesCustomEnchantmentTarget customEnchantment && !customEnchantment.isAcceptableItemInEnchantingTable(stack)) && !stack.isOf(Items.BOOK)) continue;
+    @Inject(method = "getPossibleEntries", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;isTreasure()Z", ordinal = 0, shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
+    private static void getEnchantmentBeingChecked(int power, ItemStack stack, boolean treasureAllowed, CallbackInfoReturnable<List<EnchantmentLevelEntry>> cir, List list, Item item, boolean bl, Iterator var6, Enchantment enchantment) {
+        enchantmentBeingChecked = enchantment;
+    }
 
-            for (int i = enchantment.getMaxLevel(); i > enchantment.getMinLevel() - 1; --i) {
-                if (power < enchantment.getMinPower(i) || power > enchantment.getMaxPower(i)) continue;
-                list.add(new EnchantmentLevelEntry(enchantment, i));
-                continue block0;
-            }
-        }
-
-        return list;
+    @Redirect(method = "getPossibleEntries", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentTarget;isAcceptableItem(Lnet/minecraft/item/Item;)Z"))
+    private static boolean simulateCustomEnchantmentTargets(EnchantmentTarget instance, Item item) {
+        return enchantmentBeingChecked instanceof SimulatesCustomEnchantmentTarget customEnchantment ? customEnchantment.isAcceptableItemInEnchantingTable(item) : instance.isAcceptableItem(item);
     }
 }

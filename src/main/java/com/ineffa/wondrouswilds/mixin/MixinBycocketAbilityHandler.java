@@ -35,7 +35,7 @@ public abstract class MixinBycocketAbilityHandler extends Entity implements CanS
      */
     @ModifyVariable(method = "setVelocity(DDDFF)V", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     public float preventSpreadWithBycocket(float divergence) {
-        if (this.getOwner() instanceof BycocketUser bycocketUser && bycocketUser.isAccurateWith((ProjectileEntity) (Object) this))
+        if (this.getOwner() instanceof BycocketUser bycocketUser && bycocketUser.wondrouswilds$isAccurateWith((ProjectileEntity) (Object) this))
             return 0.0F;
 
         return divergence;
@@ -43,15 +43,14 @@ public abstract class MixinBycocketAbilityHandler extends Entity implements CanS
 
     @Override
     public boolean canLandSharpshot() {
-        return this.getOwner() instanceof BycocketUser owner && owner.canSharpshotWith((ProjectileEntity) (Object) this);
+        return this.getOwner() instanceof BycocketUser owner && owner.wondrouswilds$canSharpshotWith((ProjectileEntity) (Object) this);
     }
 
     @Unique
     private boolean hasRegisteredSharpshot = false;
 
-    @Unique
     @Override
-    public boolean hasRegisteredSharpshot() {
+    public boolean wondrouswilds$hasRegisteredSharpshot() {
         return this.hasRegisteredSharpshot;
     }
 
@@ -62,7 +61,7 @@ public abstract class MixinBycocketAbilityHandler extends Entity implements CanS
         if (!this.getWorld().isClient()) {
             this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 2.0F);
 
-            if (this.getWorld() instanceof ServerWorld serverWorld) serverWorld.spawnParticles(WondrousWildsParticles.SHARPSHOT_HIT, this.getX(), this.getBodyY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            if (this.getWorld() instanceof ServerWorld serverWorld) serverWorld.spawnParticles(WondrousWildsParticles.SHARPSHOT_HIT, this.getX(), this.getY(), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
         }
     }
 }

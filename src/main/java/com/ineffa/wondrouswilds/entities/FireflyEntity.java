@@ -6,6 +6,7 @@ import com.ineffa.wondrouswilds.entities.ai.FireflyLandOnEntityGoal;
 import com.ineffa.wondrouswilds.entities.ai.FireflyWanderFlyingGoal;
 import com.ineffa.wondrouswilds.entities.ai.FireflyWanderLandGoal;
 import com.ineffa.wondrouswilds.registry.WondrousWildsTags;
+import com.ineffa.wondrouswilds.util.WondrousWildsUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
@@ -17,10 +18,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
@@ -41,8 +40,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
-
-import java.util.Objects;
 
 public class FireflyEntity extends FlyingAndWalkingAnimalEntity implements IAnimatable {
 
@@ -200,46 +197,14 @@ public class FireflyEntity extends FlyingAndWalkingAnimalEntity implements IAnim
 
         super.stopRiding();
 
-        if (!this.getWorld().isClient()) {
-            if (vehicle instanceof PlayerEntity) {
-                ServerWorld serverWorld = (ServerWorld) this.getWorld();
-                for (ServerPlayerEntity player : serverWorld.getPlayers()) player.networkHandler.sendPacket(new EntityPassengersSetS2CPacket(vehicle));
-            }
-        }
+        if (this.getWorld() instanceof ServerWorld serverWorld && vehicle instanceof PlayerEntity)
+            for (ServerPlayerEntity player : serverWorld.getPlayers()) player.networkHandler.sendPacket(new EntityPassengersSetS2CPacket(vehicle));
     }
 
     @Override
     public double getHeightOffset() {
-        double offset = 0.0D;
-
-        if (this.hasVehicle()) {
-            EntityType<?> vehicleType = Objects.requireNonNull(this.getVehicle()).getType();
-
-            if (vehicleType == EntityType.ZOMBIE_VILLAGER || vehicleType == EntityType.ENDERMAN) offset = 0.6D;
-            else if (vehicleType == EntityType.PLAYER || vehicleType == EntityType.ZOMBIE || vehicleType == EntityType.SKELETON || vehicleType == EntityType.VILLAGER || vehicleType == EntityType.WANDERING_TRADER || vehicleType == EntityType.PILLAGER || vehicleType == EntityType.VINDICATOR || vehicleType == EntityType.EVOKER || vehicleType == EntityType.ILLUSIONER) offset = 0.5D;
-
-            else if (vehicleType == EntityType.CREEPER || vehicleType == EntityType.SPIDER || vehicleType == EntityType.COW || vehicleType == EntityType.CHICKEN) offset = 0.3D;
-            else if (vehicleType == EntityType.SHEEP || vehicleType == EntityType.PIG) offset = 0.2D;
-            else if (vehicleType == EntityType.WITCH) offset = 1.0D;
-            else if (vehicleType == EntityType.ALLAY) offset = 0.1D;
-            else if (vehicleType == EntityType.IRON_GOLEM) offset = 0.65D;
-
-            else if (vehicleType == EntityType.SNOW_GOLEM) {
-                offset = 0.45D;
-
-                if (!((SnowGolemEntity) this.getVehicle()).hasPumpkin()) offset -= 0.175D;
-            }
-
-            else if (vehicleType == EntityType.ARMOR_STAND) {
-                offset = 0.4D;
-
-                if (!((ArmorStandEntity) this.getVehicle()).getEquippedStack(EquipmentSlot.HEAD).isEmpty()) offset += 0.1D;
-            }
-
-            if (this.getVehicle().isSneaking()) offset -= 0.15D;
-        }
-
-        return offset;
+        Entity vehicle = this.getVehicle();
+        return vehicle == null ? 0.0D : WondrousWildsUtils.getMountedOffsetForStandingOn(vehicle);
     }
 
     @Override

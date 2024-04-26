@@ -22,10 +22,6 @@ import java.util.Optional;
 @Mixin(SaplingGenerator.class)
 public class SaplingGeneratorMixin {
 
-    /**
-     * <p> Allows fancy birches grown from birch saplings to be autumn colored when grown in an Old Growth Birch Forest biome.
-     * <p> Unlike when generated naturally, each color has an equal chance to be selected.
-     */
     @ModifyVariable(method = "generate", at = @At("STORE"), ordinal = 0)
     private @Nullable RegistryEntry<? extends ConfiguredFeature<?, ?>> generateAutumnBirches(@Nullable RegistryEntry<? extends ConfiguredFeature<?, ?>> registryEntry, ServerWorld world, ChunkGenerator chunkGenerator, BlockPos pos, BlockState state, Random random) {
         boolean bees = registryEntry == WondrousWildsFeatures.Trees.FANCY_BIRCH_WITH_BEES_CONFIGURED;

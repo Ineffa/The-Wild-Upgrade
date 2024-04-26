@@ -38,7 +38,7 @@ public class PolyporeTreeDecorator extends TreeDecorator {
     private final int minClusters, maxClusters, maxClusterSize;
 
     public int getMinClusters() {
-        return minClusters;
+        return this.minClusters;
     }
 
     public int getMaxClusters() {
@@ -46,7 +46,7 @@ public class PolyporeTreeDecorator extends TreeDecorator {
     }
 
     public int getMaxClusterSize() {
-        return maxClusterSize;
+        return this.maxClusterSize;
     }
 
     public PolyporeTreeDecorator(int minClusters, int maxClusters, int maxClusterSize) {

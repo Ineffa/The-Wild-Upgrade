@@ -18,11 +18,11 @@ public final class WondrousWildsNetwork {
 
     @Environment(value = EnvType.CLIENT)
     public static void registerS2CPackets() {
+        ClientPlayNetworking.registerGlobalReceiver(BlockBreakingParticlesPacket.ID, BlockBreakingParticlesPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(BlockDamagePacket.ID, BlockDamagePacket::receive);
 
         ClientPlayNetworking.registerGlobalReceiver(NestTransitionStartPacket.ID, NestTransitionStartPacket::receive);
 
-        ClientPlayNetworking.registerGlobalReceiver(BlockBreakingParticlesPacket.ID, BlockBreakingParticlesPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(WoodpeckerInteractWithBlockPacket.ID, WoodpeckerInteractWithBlockPacket::receive);
     }
 

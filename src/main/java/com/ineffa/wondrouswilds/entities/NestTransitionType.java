@@ -6,11 +6,7 @@ public enum NestTransitionType {
     PEEK("StartPeekingFromNest"),
     UNPEEK("StopPeekingFromNest");
 
-    private final String animationName;
-
-    public String getAnimationName() {
-        return this.animationName;
-    }
+    public final String animationName;
 
     NestTransitionType(String animationName) {
         this.animationName = animationName;

@@ -23,24 +23,27 @@ public class ProjectileUtilMixin {
     /**
      * <p> Detects and registers when a projectile should land a sharpshot.
      * <p> First, it will check that the projectile is capable of landing a sharpshot.
-     * <p> Then, it will register a sharpshot if the projectile detects a collision with an entity's sharpshot hitbox.
+     * <p> Then, it will register a sharpshot if the projectile impacts within an entity's sharpshot height range.
      */
-    @Inject(method = "getEntityCollision(Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;F)Lnet/minecraft/util/hit/EntityHitResult;", at = @At("HEAD"))
+    @Inject(method = "getEntityCollision(Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;F)Lnet/minecraft/util/hit/EntityHitResult;", at = @At("HEAD"), cancellable = true)
     private static void detectAndRegisterSharpshots(World world, Entity entity, Vec3d min, Vec3d max, Box box, Predicate<Entity> predicate, float f, CallbackInfoReturnable<@Nullable EntityHitResult> callback) {
-        if (entity instanceof CanSharpshot sharpshotProjectile && sharpshotProjectile.canLandSharpshot()) {
-            boolean registerSharpshot = false;
-            for (Entity targetEntity : world.getOtherEntities(entity, box, predicate)) {
-                if (!(targetEntity instanceof CanTakeSharpshots canTakeSharpshots)) continue;
+        CanSharpshot sharpshotProjectile = entity instanceof CanSharpshot canSharpshot && canSharpshot.canLandSharpshot() ? canSharpshot : null;
+        boolean registerSharpshot = false;
 
-                Box sharpshotHitbox = canTakeSharpshots.getSharpshotHitbox().expand(f, 0.0D, f);
-                Optional<Vec3d> sharpshot = sharpshotHitbox.raycast(min, max);
+        double d = Double.MAX_VALUE;
+        Entity impactedEntity = null;
+        for (Entity potentialImpactedEntity : world.getOtherEntities(entity, box, predicate)) {
+            double e;
+            Optional<Vec3d> impactVec = potentialImpactedEntity.getBoundingBox().expand(f).raycast(min, max);
+            if (impactVec.isEmpty() || !((e = min.squaredDistanceTo(impactVec.get())) < d)) continue;
+            impactedEntity = potentialImpactedEntity;
+            d = e;
 
-                if (sharpshot.isPresent()) {
-                    registerSharpshot = true;
-                    break;
-                }
-            }
-            if (registerSharpshot) sharpshotProjectile.registerSharpshot();
+            if (sharpshotProjectile != null) registerSharpshot = impactedEntity instanceof CanTakeSharpshots nextValidSharpshotTarget && nextValidSharpshotTarget.wondrouswilds$isValidHeightForSharpshot(impactVec.get().getY());
         }
+
+        if (registerSharpshot) sharpshotProjectile.registerSharpshot();
+
+        callback.setReturnValue(impactedEntity == null ? null : new EntityHitResult(impactedEntity));
     }
 }

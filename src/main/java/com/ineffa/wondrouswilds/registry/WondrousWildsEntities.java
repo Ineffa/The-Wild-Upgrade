@@ -60,7 +60,7 @@ public class WondrousWildsEntities {
     );
 
     public static void initialize() {
-        if (WondrousWilds.config.mobSettings.firefliesSpawnNaturally) BiomeModifications.addSpawn(context -> context.hasTag(ConventionalBiomeTags.IN_OVERWORLD), WondrousWildsSpawnGroups.FIREFLIES, FIREFLY, 100, 3, 6);
+        if (WondrousWilds.config.mobSettings.firefliesSpawnNaturally) BiomeModifications.addSpawn(context -> context.hasTag(ConventionalBiomeTags.IN_OVERWORLD), WondrousWildsSpawnGroups.FIREFLIES, FIREFLY, 100, 2, 3);
     }
 
     public static final Map<EntityType<? extends BlockNester>, Pair<Integer, Integer>> DEFAULT_NESTER_CAPACITY_WEIGHTS = new ImmutableMap.Builder<EntityType<? extends BlockNester>, Pair<Integer, Integer>>()

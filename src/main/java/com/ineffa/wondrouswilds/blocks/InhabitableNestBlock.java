@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -19,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public abstract class InhabitableNestBlock extends BlockWithEntity {
@@ -59,6 +62,11 @@ public abstract class InhabitableNestBlock extends BlockWithEntity {
 
             if (nest instanceof TreeHollowBlockEntity) world.updateComparators(pos, this);
         }
+    }
+
+    @Override
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+        return super.getDroppedStacks(state, builder);
     }
 
     @Override

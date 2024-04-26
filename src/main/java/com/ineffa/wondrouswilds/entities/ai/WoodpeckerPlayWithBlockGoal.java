@@ -3,13 +3,9 @@ package com.ineffa.wondrouswilds.entities.ai;
 import com.ineffa.wondrouswilds.entities.WoodpeckerEntity;
 import com.ineffa.wondrouswilds.registry.WondrousWildsTags;
 import com.ineffa.wondrouswilds.util.WondrousWildsUtils;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
 import java.util.EnumSet;
@@ -33,9 +29,7 @@ public class WoodpeckerPlayWithBlockGoal extends MoveToTargetPosGoal {
 
     @Override
     public boolean canStart() {
-        if (!(this.woodpecker.getRandom().nextInt(100) == 0 && this.woodpecker.canWander())) return false;
-
-        return this.findTargetPos();
+        return this.woodpecker.getRandom().nextInt(600) == 0 && this.woodpecker.canWander() && !this.woodpecker.isFollowing() && this.findTargetPos();
     }
 
     @Override
@@ -67,18 +61,7 @@ public class WoodpeckerPlayWithBlockGoal extends MoveToTargetPosGoal {
     public void tick() {
         super.tick();
 
-        World world = this.woodpecker.getWorld();
-        BlockPos lookPos = this.getTargetPos();
-        if (lookPos != null) {
-            BlockState lookState = world.getBlockState(lookPos);
-            if (lookState != null) {
-                VoxelShape shape = lookState.getOutlineShape(world, lookPos);
-                if (shape != null && !shape.isEmpty()) {
-                    Box box = shape.getBoundingBox();
-                    if (box != null) this.woodpecker.getLookControl().lookAt(box.getCenter().add(lookPos.getX(), lookPos.getY(), lookPos.getZ()));
-                }
-            }
-        }
+        if (this.getTargetPos() != null) this.woodpecker.getLookControl().lookAt(WondrousWildsUtils.getCenterOfBlockShape(this.woodpecker.getWorld(), this.getTargetPos()));
 
         if (this.hasReached()) {
             if (this.woodpecker.isFlying()) this.woodpecker.setVelocity(this.woodpecker.getVelocity().multiply(0.5D));
@@ -97,7 +80,7 @@ public class WoodpeckerPlayWithBlockGoal extends MoveToTargetPosGoal {
                     return;
                 }
 
-                if (this.woodpecker.getRandom().nextInt(40) == 0) this.woodpecker.startPeckChain(1 + this.woodpecker.getRandom().nextInt(4), this.woodpecker.getRandom().nextBetween(9, 11));
+                if (this.woodpecker.getRandom().nextInt(40) == 0) this.woodpecker.startPeckChain();
             }
 
             this.ticksUnableToReach = 0;
@@ -105,24 +88,18 @@ public class WoodpeckerPlayWithBlockGoal extends MoveToTargetPosGoal {
         }
         else {
             if (this.woodpecker.getNavigation().isIdle()) {
-                if (this.ticksUnableToReach >= 100) {
+                if (this.ticksUnableToReach++ >= 100) {
                     if (!this.woodpecker.isFlying()) {
                         this.woodpecker.setFlying(true);
                         this.ticksUnableToReach = 0;
                     }
                     else this.shouldStop = true;
-
                     return;
                 }
-                ++this.ticksUnableToReach;
             }
             else this.ticksUnableToReach = 0;
 
-            if (this.ticksTryingToReach >= 400) {
-                this.shouldStop = true;
-                return;
-            }
-            ++this.ticksTryingToReach;
+            if (this.ticksTryingToReach++ >= 400) this.shouldStop = true;
         }
     }
 

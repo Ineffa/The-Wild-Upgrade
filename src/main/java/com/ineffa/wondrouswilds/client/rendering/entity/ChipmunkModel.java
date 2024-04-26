@@ -16,7 +16,6 @@ public class ChipmunkModel extends AnimatedGeoModel<ChipmunkEntity> {
     public static final Identifier TEXTURE_PATH = new Identifier(WondrousWilds.MOD_ID, "textures/entity/chipmunk/chipmunk.png");
     public static final Identifier ANIMATION_PATH = new Identifier(WondrousWilds.MOD_ID, "animations/chipmunk.animation.json");
 
-
     @Override
     public Identifier getModelResource(ChipmunkEntity chipmunk) {
         return MODEL_PATH;
@@ -37,17 +36,21 @@ public class ChipmunkModel extends AnimatedGeoModel<ChipmunkEntity> {
         super.setMolangQueries(animatable, currentTick);
 
         ChipmunkEntity chipmunk = (ChipmunkEntity) animatable;
-
         MolangParser parser = GeckoLibCache.getInstance().parser;
-
         float delta = MinecraftClient.getInstance().getTickDelta();
 
-        float headPitch = MathHelper.lerp(delta, chipmunk.prevPitch, chipmunk.getPitch());
-        float headYaw = MathHelper.lerpAngleDegrees(delta, chipmunk.prevHeadYaw, chipmunk.getHeadYaw()) - MathHelper.lerpAngleDegrees(delta, chipmunk.prevBodyYaw, chipmunk.getBodyYaw());
+        parser.setValue("query.head_pitch", () -> MathHelper.lerp(delta, chipmunk.prevPitch, chipmunk.getPitch()));
+        parser.setValue("query.head_yaw", () -> MathHelper.lerpAngleDegrees(delta, chipmunk.prevHeadYaw, chipmunk.getHeadYaw()) - MathHelper.lerpAngleDegrees(delta, chipmunk.prevBodyYaw, chipmunk.getBodyYaw()));
 
-        parser.setValue("query.head_pitch", () -> headPitch);
-        parser.setValue("query.head_yaw", () -> headYaw);
+        float swing = chipmunk.limbAngle - chipmunk.limbDistance * (1.0F - delta);
+        float swingAmount = MathHelper.lerp(delta, chipmunk.lastLimbDistance, chipmunk.limbDistance);
+
+        parser.setValue("query.swing", () -> swing * (chipmunk.isBaby() ? 2.0D : 1.0D));
+        parser.setValue("query.swing_amount", () -> Math.min(1.0D, swingAmount * 2.0D));
+        parser.setValue("query.swing_multiplier", () -> 300.0D);
 
         parser.setValue("query.tilt_angle", () -> chipmunk.getMovementTiltAngle(delta));
+        parser.setValue("query.tilt_angle_tail_upper", () -> chipmunk.getMovementTiltAngleTailUpper(delta));
+        parser.setValue("query.tilt_angle_tail_lower", () -> chipmunk.getMovementTiltAngleTailLower(delta));
     }
 }

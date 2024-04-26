@@ -13,8 +13,8 @@ import javax.annotation.Nullable;
 public class NesterEgg {
 
     /**
-     * The amount of space the egg will take up inside its nest.
-     * <p>Works identically to inhabitants, and should always match its baby equivalent's value.
+     * <p> The amount of space the egg will take up inside its nest.
+     * <p> Works identically to inhabitants, and should always match its baby equivalent's value.
      */
     public final int capacityWeight;
 
@@ -55,7 +55,7 @@ public class NesterEgg {
     }
 
     /**
-     * Constructs an egg with fully specified data.
+     * <p> Constructs an egg with fully specified data.
      * <p> Normally used to load an existing one from NBT.
      */
     public NesterEgg(int capacityWeight, EntityType<? extends BlockNester> entityTypeToHatch, @Nullable NbtCompound dataToInherit, boolean nocturnal, Pair<Integer, Integer> crackCooldownRange, int crackCooldown, int cracksUntilHatch) {

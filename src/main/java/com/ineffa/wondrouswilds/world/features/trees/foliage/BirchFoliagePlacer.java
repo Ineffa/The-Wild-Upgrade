@@ -44,12 +44,14 @@ public class BirchFoliagePlacer extends FoliagePlacer {
         currentCenter.move(Direction.DOWN, 2);
         leaves.addAll(getCenteredCuboid(currentCenter, 1, 1));
 
+        int[] edgeSizes = {0, 0};
+        if (random.nextInt(edgeSizes.length + 1) != 0) edgeSizes[random.nextInt(2)] = 1;
         for (int i = 0; i < 2; ++i) {
-            leaves.addAll(getEdges(currentCenter, 2, i));
+            leaves.addAll(getEdges(currentCenter, 2, edgeSizes[i]));
             currentCenter.move(Direction.DOWN);
         }
 
-        int bottomSize = random.nextInt(4);
+        int bottomSize = random.nextInt(edgeSizes[1] == 0 ? 3 : 4);
         int bottomCurrentStage = 1;
         while (bottomCurrentStage <= bottomSize) {
             for (Direction direction : HORIZONTAL_DIRECTIONS) leaves.add(switch (bottomCurrentStage) {

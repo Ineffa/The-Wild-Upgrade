@@ -50,6 +50,10 @@
       {
         "type": "minecraft:beehive",
         "probability": 0.002
+      },
+      {
+        "type": "minecraft:ivy",
+        "chance_to_generate": 0.03
       }
     ]
   }

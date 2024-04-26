@@ -2,11 +2,10 @@ package com.ineffa.wondrouswilds.registry;
 
 import com.ineffa.wondrouswilds.WondrousWilds;
 import com.ineffa.wondrouswilds.entities.projectiles.BodkinArrowEntity;
-import com.ineffa.wondrouswilds.items.LovifierItem;
 import com.ineffa.wondrouswilds.items.BodkinArrowItem;
+import com.ineffa.wondrouswilds.items.BycocketItem;
+import com.ineffa.wondrouswilds.items.LovifierItem;
 import com.ineffa.wondrouswilds.items.ScrollOfSecretsItem;
-import com.ineffa.wondrouswilds.items.armor.BycocketItem;
-import com.ineffa.wondrouswilds.items.armor.WondrousWildsArmorMaterial;
 import com.ineffa.wondrouswilds.items.recipes.ShapedSecretRecipe;
 import com.ineffa.wondrouswilds.items.recipes.ShapelessSecretRecipe;
 import com.ineffa.wondrouswilds.mixin.ComposterBlockInvoker;
@@ -17,12 +16,8 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.item.*;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.ItemTags;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -34,7 +29,7 @@ import java.util.List;
 
 public class WondrousWildsItems {
 
-    public static final ItemGroup WONDROUS_WILDS_ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(WondrousWilds.MOD_ID, "wondrous_wilds"), () -> new ItemStack(WondrousWildsItems.WOODPECKER_CREST_FEATHER));
+    public static final ItemGroup WONDROUS_WILDS_ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(WondrousWilds.MOD_ID, "wondrous_wilds"), () -> new ItemStack(WondrousWildsItems.ACORN));
 
     public static final BlockItem PURPLE_VIOLET = registerBlockItem(WondrousWildsBlocks.PURPLE_VIOLET);
     public static final BlockItem PINK_VIOLET = registerBlockItem(WondrousWildsBlocks.PINK_VIOLET);
@@ -44,8 +39,10 @@ public class WondrousWildsItems {
     public static final BlockItem SMALL_POLYPORE = registerBlockItem(WondrousWildsBlocks.SMALL_POLYPORE);
     public static final BlockItem BIG_POLYPORE = registerBlockItem(WondrousWildsBlocks.BIG_POLYPORE);
 
+    public static final BlockItem BUSH = registerBlockItem(WondrousWildsBlocks.BUSH);
     public static final BlockItem IVY = registerBlockItem(WondrousWildsBlocks.IVY);
 
+    public static final BlockItem FALLEN_BIRCH_LEAVES = registerBlockItem(WondrousWildsBlocks.FALLEN_BIRCH_LEAVES);
     public static final BlockItem YELLOW_BIRCH_LEAVES = registerBlockItem(WondrousWildsBlocks.YELLOW_BIRCH_LEAVES);
     public static final BlockItem ORANGE_BIRCH_LEAVES = registerBlockItem(WondrousWildsBlocks.ORANGE_BIRCH_LEAVES);
     public static final BlockItem RED_BIRCH_LEAVES = registerBlockItem(WondrousWildsBlocks.RED_BIRCH_LEAVES);
@@ -114,7 +111,8 @@ public class WondrousWildsItems {
 
     public static final Item WOODPECKER_CREST_FEATHER = registerItem("woodpecker_crest_feather", new Item(new FabricItemSettings().group(WONDROUS_WILDS_ITEM_GROUP)));
     public static final Item BODKIN_ARROW = registerItem("bodkin_arrow", new BodkinArrowItem(new FabricItemSettings().group(WONDROUS_WILDS_ITEM_GROUP)));
-    public static final Item BLACK_BYCOCKET = registerItem("black_bycocket", new BycocketItem(DyeColor.BLACK));
+
+    public static final Item BYCOCKET_WOODPECKER = registerItem("bycocket_woodpecker", new BycocketItem(BycocketItem.Flair.WOODPECKER));
 
     public static final Item MUSIC_DISC_AVIAN = registerItem("music_disc_avian", MusicDiscItemInvoker.createNewMusicDisc(14, WondrousWildsSounds.MUSIC_DISC_AVIAN, new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC).group(WONDROUS_WILDS_ITEM_GROUP), 218));
 
@@ -139,20 +137,34 @@ public class WondrousWildsItems {
     }
 
     public static void initialize() {
-        ComposterBlockInvoker.addCompostableItem(0.65F, PURPLE_VIOLET);
-        ComposterBlockInvoker.addCompostableItem(0.65F, PINK_VIOLET);
-        ComposterBlockInvoker.addCompostableItem(0.65F, RED_VIOLET);
-        ComposterBlockInvoker.addCompostableItem(0.65F, WHITE_VIOLET);
+        registerDispenserBehaviors();
+        registerCompostableItems();
+        registerTrades();
+        RecipeSerializers.initialize();
+    }
 
+    private static void registerDispenserBehaviors() {
+        DispenserBlock.registerBehavior(BODKIN_ARROW, BodkinArrowEntity.getDispenserBehavior());
+    }
+
+    private static void registerCompostableItems() {
         ComposterBlockInvoker.addCompostableItem(0.3F, SMALL_POLYPORE);
-        ComposterBlockInvoker.addCompostableItem(0.65F, BIG_POLYPORE);
-
+        ComposterBlockInvoker.addCompostableItem(0.3F, BUSH);
+        ComposterBlockInvoker.addCompostableItem(0.3F, FALLEN_BIRCH_LEAVES);
         ComposterBlockInvoker.addCompostableItem(0.3F, YELLOW_BIRCH_LEAVES);
         ComposterBlockInvoker.addCompostableItem(0.3F, ORANGE_BIRCH_LEAVES);
         ComposterBlockInvoker.addCompostableItem(0.3F, RED_BIRCH_LEAVES);
 
-        DispenserBlock.registerBehavior(BODKIN_ARROW, BodkinArrowEntity.getDispenserBehavior());
+        ComposterBlockInvoker.addCompostableItem(0.5F, IVY);
 
+        ComposterBlockInvoker.addCompostableItem(0.65F, PURPLE_VIOLET);
+        ComposterBlockInvoker.addCompostableItem(0.65F, PINK_VIOLET);
+        ComposterBlockInvoker.addCompostableItem(0.65F, RED_VIOLET);
+        ComposterBlockInvoker.addCompostableItem(0.65F, WHITE_VIOLET);
+        ComposterBlockInvoker.addCompostableItem(0.65F, BIG_POLYPORE);
+    }
+
+    private static void registerTrades() {
         Trades.addWandererTrade(false, 16, PURPLE_VIOLET, 2, 1);
         Trades.addWandererTrade(false, 16, PINK_VIOLET, 2, 1);
         Trades.addWandererTrade(false, 16, RED_VIOLET, 2, 1);
@@ -161,15 +173,11 @@ public class WondrousWildsItems {
         Trades.addWandererTrade(false, 12, SMALL_POLYPORE, 3, 1);
         Trades.addWandererTrade(false, 8, BIG_POLYPORE, 1, 1);
 
+        Trades.addWandererTrade(false, 12, IVY, 1, 1);
+
         //Trades.addWandererTrade(true, 1, SCROLL_OF_SECRETS_NEST_BOX, 1, 8, WOODPECKER_CREST_FEATHER, 10);
 
         Trades.initialize();
-
-        RecipeSerializers.initialize();
-    }
-
-    public static final class ArmorMaterials {
-        public static final WondrousWildsArmorMaterial BYCOCKET = new WondrousWildsArmorMaterial("bycocket", 10, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.fromTag(ItemTags.WOOL));
     }
 
     public static final class Trades {

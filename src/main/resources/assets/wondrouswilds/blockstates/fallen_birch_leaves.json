@@ -1,0 +1,148 @@
+{
+  "variants": {
+    "facing=north,density=1": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt0"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt1"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt2"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt3"}
+    ],
+    "facing=north,density=2": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt0", "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt1", "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt2"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt3"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt4"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt5"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt6"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt7"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt8"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt9"}
+    ],
+    "facing=north,density=3": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt0"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt1"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt2"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt3"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt4"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt5"}
+    ],
+    "facing=north,density=4": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt0", "weight": 4},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt1"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt2"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt3"},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt4"}
+    ],
+    "facing=north,density=5": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density5"}
+    ],
+    "facing=east,density=1": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt0", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt1", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt2", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt3", "y": 90}
+    ],
+    "facing=east,density=2": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt0", "y": 90, "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt1", "y": 90, "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt2", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt3", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt4", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt5", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt6", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt7", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt8", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt9", "y": 90}
+    ],
+    "facing=east,density=3": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt0", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt1", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt2", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt3", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt4", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt5", "y": 90}
+    ],
+    "facing=east,density=4": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt0", "y": 90, "weight": 4},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt1", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt2", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt3", "y": 90},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt4", "y": 90}
+    ],
+    "facing=east,density=5": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density5", "y": 90}
+    ],
+    "facing=south,density=1": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt0", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt1", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt2", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt3", "y": 180}
+    ],
+    "facing=south,density=2": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt0", "y": 180, "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt1", "y": 180, "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt2", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt3", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt4", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt5", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt6", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt7", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt8", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt9", "y": 180}
+    ],
+    "facing=south,density=3": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt0", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt1", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt2", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt3", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt4", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt5", "y": 180}
+    ],
+    "facing=south,density=4": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt0", "y": 180, "weight": 4},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt1", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt2", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt3", "y": 180},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt4", "y": 180}
+    ],
+    "facing=south,density=5": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density5", "y": 180}
+    ],
+    "facing=west,density=1": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt0", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt1", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt2", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density1_alt3", "y": 270}
+    ],
+    "facing=west,density=2": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt0", "y": 270, "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt1", "y": 270, "weight": 2},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt2", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt3", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt4", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt5", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt6", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt7", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt8", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density2_alt9", "y": 270}
+    ],
+    "facing=west,density=3": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt0", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt1", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt2", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt3", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt4", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density3_alt5", "y": 270}
+    ],
+    "facing=west,density=4": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt0", "y": 270, "weight": 4},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt1", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt2", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt3", "y": 270},
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density4_alt4", "y": 270}
+    ],
+    "facing=west,density=5": [
+      {"model": "wondrouswilds:block/fallen_birch_leaves_density5", "y": 270}
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"groundedConstant": {
+		"GroundedConstant": {
 			"loop": true,
 			"bones": {
 				"bodyConstant": {
@@ -50,7 +50,7 @@
 				}
 			}
 		},
-		"flyingConstant": {
+		"FlyingConstant": {
 			"loop": true,
 			"bones": {
 				"bodyConstant": {
@@ -160,7 +160,7 @@
 				}
 			}
 		},
-		"flap": {
+		"Flap": {
 			"loop": true,
 			"animation_length": 0.91667,
 			"bones": {
@@ -242,7 +242,7 @@
 				}
 			}
 		},
-		"clingingConstant": {
+		"ClingingConstant": {
 			"loop": true,
 			"bones": {
 				"coreConstant": {
@@ -310,7 +310,7 @@
 				}
 			}
 		},
-		"peck1Overlap": {
+		"Peck1Overlap": {
 			"animation_length": 1,
 			"bones": {
 				"bodyOverlap": {
@@ -395,7 +395,7 @@
 				}
 			}
 		},
-		"peck2Overlap": {
+		"Peck2Overlap": {
 			"animation_length": 1.5,
 			"bones": {
 				"bodyOverlap": {
@@ -521,7 +521,7 @@
 				}
 			}
 		},
-		"peck3Overlap": {
+		"Peck3Overlap": {
 			"animation_length": 2,
 			"bones": {
 				"bodyOverlap": {
@@ -693,7 +693,7 @@
 				}
 			}
 		},
-		"peck4Overlap": {
+		"Peck4Overlap": {
 			"animation_length": 2.5,
 			"bones": {
 				"bodyOverlap": {
@@ -906,7 +906,7 @@
 				}
 			}
 		},
-		"drum": {
+		"Drum": {
 			"animation_length": 2.75,
 			"bones": {
 				"head": {
@@ -1006,7 +1006,7 @@
 				}
 			}
 		},
-		"chirpOverlap": {
+		"ChirpOverlap": {
 			"loop": true,
 			"animation_length": 0.2,
 			"bones": {
@@ -1055,10 +1055,7 @@
 				}
 			}
 		},
-		"empty": {
-			"loop": true
-		},
-		"failToFly": {
+		"FailToFly": {
 			"animation_length": 2.75,
 			"bones": {
 				"body": {
@@ -1449,6 +1446,9 @@
 					}
 				}
 			}
+		},
+		"Empty": {
+			"loop": true
 		}
 	},
 	"geckolib_format_version": 2

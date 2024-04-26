@@ -34,7 +34,7 @@ public class WoodpeckerRenderer extends ExtendedGeoEntityRenderer<WoodpeckerEnti
     @Nullable
     @Override
     protected ItemStack getHeldItemForBone(String boneName, WoodpeckerEntity currentEntity) {
-        if (boneName.equals(HELD_ITEM_BONE_NAME)) return mainHand;
+        if (boneName.equals(HELD_ITEM_BONE_NAME)) return currentEntity.getMainHandStack();
 
         return null;
     }
@@ -48,7 +48,7 @@ public class WoodpeckerRenderer extends ExtendedGeoEntityRenderer<WoodpeckerEnti
 
     @Override
     protected void preRenderItem(MatrixStack matrixStack, ItemStack item, String boneName, WoodpeckerEntity currentEntity, IBone bone) {
-        if (item == this.mainHand) {
+        if (item == currentEntity.getMainHandStack()) {
             matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
             matrixStack.translate(0.0D, 0.0D, -0.035D);
             matrixStack.scale(0.5F, 0.5F, 0.5F);

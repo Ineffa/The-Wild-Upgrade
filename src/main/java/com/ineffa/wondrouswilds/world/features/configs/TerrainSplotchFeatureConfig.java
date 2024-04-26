@@ -20,7 +20,7 @@ public class TerrainSplotchFeatureConfig implements FeatureConfig {
             BlockPredicate.BASE_CODEC.fieldOf("replace_target_predicate").forGetter(config -> config.replaceTargetPredicate),
             IntProvider.createValidatingCodec(1, 16).fieldOf("horizontal_radius").forGetter(config -> config.horizontalRadius),
             IntProvider.POSITIVE_CODEC.fieldOf("vertical_spread").forGetter(config -> config.verticalSpread),
-            FloatProvider.createValidatedCodec(Float.MIN_VALUE, 1.0F).fieldOf("density_multiplier").forGetter(config -> config.densityMultiplier)
+            FloatProvider.createValidatedCodec(0.0F, 1.0F).fieldOf("density_multiplier").forGetter(config -> config.densityMultiplier)
     ).apply(instance, TerrainSplotchFeatureConfig::new));
 
     public TerrainSplotchFeatureConfig(BlockStateProvider splotchStateProvider, BlockPredicate replaceTargetPredicate, IntProvider horizontalRadius, IntProvider verticalSpread, FloatProvider densityMultiplier) {

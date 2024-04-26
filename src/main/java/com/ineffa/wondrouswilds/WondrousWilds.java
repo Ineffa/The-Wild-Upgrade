@@ -2,7 +2,7 @@ package com.ineffa.wondrouswilds;
 
 import com.ineffa.wondrouswilds.client.rendering.WondrousWildsColorProviders;
 import com.ineffa.wondrouswilds.config.WondrousWildsConfig;
-import com.ineffa.wondrouswilds.entities.WoodpeckerEntity;
+import com.ineffa.wondrouswilds.entities.ChipmunkEntity;
 import com.ineffa.wondrouswilds.mixin.MobEntityAccessor;
 import com.ineffa.wondrouswilds.registry.*;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -10,11 +10,15 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.passive.FoxEntity;
+import net.minecraft.entity.ai.goal.UntamedActiveTargetGoal;
+import net.minecraft.entity.passive.CatEntity;
+import net.minecraft.entity.passive.OcelotEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.BiomeKeys;
@@ -56,6 +60,7 @@ public class WondrousWilds implements ModInitializer {
 		WondrousWildsParticles.initialize();
 
 		WondrousWildsEntities.initialize();
+		WondrousWildsStatusEffects.initialize();
 		WondrousWildsBlocks.initialize();
 		WondrousWildsItems.initialize();
 		WondrousWildsEnchantments.initialize();
@@ -67,6 +72,7 @@ public class WondrousWilds implements ModInitializer {
 		WondrousWildsAdvancementCriteria.initialize();
 
 		upgradeBirchForests();
+		upgradeForest();
 
 		ServerEntityEvents.ENTITY_LOAD.register(WondrousWilds::hookEntityCreation);
 
@@ -85,25 +91,27 @@ public class WondrousWilds implements ModInitializer {
 			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.PATCH_GRASS_FOREST.value());
 			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.FOREST_FLOWERS.value());
 
-			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.BIRCH_FOREST_GRASS_PATCH_PLACED.getKey().orElseThrow());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.BIRCH_FOREST_GRASS_PLACED.getKey().orElseThrow());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.BIRCH_FOREST_TALL_FLOWERS_PLACED.getKey().orElseThrow());
+
+			context.getEffects().setMusic(MusicType.createIngameMusic(WondrousWildsSounds.MUSIC_OVERWORLD_BIRCH_FOREST));
 		});
 
 		birchForestModifier.add(ModificationPhase.ADDITIONS, ALL_BIRCH_FORESTS, context -> {
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, WondrousWildsFeatures.BIRCH_FOREST_BOULDER_PLACED.getKey().orElseThrow());
 
-			context.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, WondrousWildsFeatures.COARSE_DIRT_SPLOTCH_ON_GRASS_PLACED.getKey().orElseThrow());
-			context.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, WondrousWildsFeatures.LARGE_COARSE_DIRT_SPLOTCH_ON_GRASS_PLACED.getKey().orElseThrow());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, WondrousWildsFeatures.BIRCH_FOREST_MEDIUM_COARSE_DIRT_SPLOTCH_PLACED.getKey().orElseThrow());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, WondrousWildsFeatures.BIRCH_FOREST_LARGE_COARSE_DIRT_SPLOTCH_PLACED.getKey().orElseThrow());
 
-			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FALLEN_BIRCH_LOG_PLACED.getKey().orElseThrow());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.BIRCH_FOREST_FALLEN_LOG_PLACED.getKey().orElseThrow());
 
-			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.BIRCH_FOREST_TALL_GRASS_PATCH_PLACED.getKey().orElseThrow());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.BIRCH_FOREST_TALL_GRASS_PLACED.getKey().orElseThrow());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.BIRCH_FOREST_BUSHES_PLACED.getKey().orElseThrow());
 
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.PURPLE_VIOLETS_PLACED.getKey().orElseThrow());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.PINK_VIOLETS_PLACED.getKey().orElseThrow());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.RED_VIOLETS_PLACED.getKey().orElseThrow());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.WHITE_VIOLETS_PLACED.getKey().orElseThrow());
-
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.LILY_OF_THE_VALLEY_PATCH_PLACED.getKey().orElseThrow());
 
 			context.getSpawnSettings().addSpawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.FOX, 6, 2, 4));
@@ -120,13 +128,50 @@ public class WondrousWilds implements ModInitializer {
 			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.BIRCH_TALL.value());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.Trees.OLD_GROWTH_BIRCH_FOREST_TREES_PLACED.getKey().orElseThrow());
 
+			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.PATCH_PUMPKIN.value());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.AUTUMN_PUMPKIN_PATCH.getKey().orElseThrow());
+
+			context.getWeather().setTemperature(0.3F);
 			context.getEffects().setGrassColor(WondrousWildsColorProviders.getOldGrowthBirchForestGrassColor());
+		});
+
+		birchForestModifier.add(ModificationPhase.ADDITIONS, OLD_GROWTH_BIRCH_FOREST, context -> {
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.TOP_LAYER_MODIFICATION, WondrousWildsFeatures.COVER_SURFACE_WITH_FALLEN_BIRCH_LEAVES_PLACED.getKey().orElseThrow());
+		});
+	}
+
+	private static void upgradeForest() {
+		BiomeModification forestModifier = BiomeModifications.create(new Identifier(MOD_ID, "forest_modifier"));
+		final Predicate<BiomeSelectionContext> FOREST = BiomeSelectors.includeByKey(BiomeKeys.FOREST);
+
+		forestModifier.add(ModificationPhase.REPLACEMENTS, FOREST, context -> {
+			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.TREES_BIRCH_AND_OAK.value());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.Trees.FOREST_TREES_PLACED.getKey().orElseThrow());
+
+			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.PATCH_GRASS_FOREST.value());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FOREST_GRASS_PLACED.getKey().orElseThrow());
+		});
+
+		forestModifier.add(ModificationPhase.ADDITIONS, FOREST, context -> {
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, WondrousWildsFeatures.FOREST_BOULDER_PLACED.getKey().orElseThrow());
+
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, WondrousWildsFeatures.FOREST_COARSE_DIRT_SPLOTCH_PLACED.getKey().orElseThrow());
+
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FOREST_FALLEN_LOG_PLACED.getKey().orElseThrow());
+
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FOREST_BUSHES_PLACED.getKey().orElseThrow());
 		});
 	}
 
 	private static void hookEntityCreation(Entity entityBeingCreated, ServerWorld world) {
-
-		if (entityBeingCreated instanceof FoxEntity fox)
-			((MobEntityAccessor) fox).getTargetSelector().add(7, new ActiveTargetGoal<>(fox, WoodpeckerEntity.class, 20, true, true, entity -> !((WoodpeckerEntity) entity).isFlying()));
+		if (entityBeingCreated instanceof WolfEntity wolfEntity) {
+			((MobEntityAccessor) wolfEntity).getTargetSelector().add(5, new UntamedActiveTargetGoal<>(wolfEntity, ChipmunkEntity.class, false, null));
+		}
+		else if (entityBeingCreated instanceof CatEntity catEntity) {
+			((MobEntityAccessor) catEntity).getTargetSelector().add(1, new UntamedActiveTargetGoal<>(catEntity, ChipmunkEntity.class, false, null));
+		}
+		else if (entityBeingCreated instanceof OcelotEntity ocelotEntity) {
+			((MobEntityAccessor) ocelotEntity).getTargetSelector().add(1, new ActiveTargetGoal<>(ocelotEntity, ChipmunkEntity.class, false));
+		}
 	}
 }

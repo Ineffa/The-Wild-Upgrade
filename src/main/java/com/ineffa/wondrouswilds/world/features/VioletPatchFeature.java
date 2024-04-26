@@ -28,16 +28,16 @@ public class VioletPatchFeature extends Feature<VioletPatchFeatureConfig> {
 
         int i = 0;
         BlockPos.Mutable mutablePos = new BlockPos.Mutable();
-        for (int l = 0; l < 280; ++l) {
+        for (int j = 0; j < 280; ++j) {
             mutablePos.set(origin, random.nextInt(horizontalSpread) - random.nextInt(horizontalSpread), random.nextInt(verticalSpread) - random.nextInt(verticalSpread), random.nextInt(horizontalSpread) - random.nextInt(horizontalSpread));
 
             if (world.isAir(mutablePos)) {
-                BlockState violetState = config.violetProvider.getBlockState(random, mutablePos);
-
-                if (!violetState.canPlaceAt(world, mutablePos)) continue;
+                BlockState violetState = config.violetProvider().getBlockState(random, mutablePos);
 
                 if (violetState.getBlock() instanceof VioletBlock) violetState = violetState.with(VioletBlock.VIOLETS, random.nextBetween(VioletBlock.MIN_VIOLETS, VioletBlock.MAX_VIOLETS));
                 else continue;
+
+                if (!violetState.canPlaceAt(world, mutablePos)) continue;
 
                 world.setBlockState(mutablePos, violetState, Block.NOTIFY_LISTENERS);
             }

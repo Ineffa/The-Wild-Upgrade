@@ -22,7 +22,7 @@ public class RandomFromGroupsFeature extends Feature<RandomFromGroupsFeatureConf
         ChunkGenerator chunkGenerator = context.getGenerator();
         BlockPos blockPos = context.getOrigin();
 
-        for (FeatureGroup.RandomEntry randomGroupEntry : config.randomGroups()) {
+        for (FeatureGroup.RandomEntry randomGroupEntry : config.randomEntries()) {
             if (!(random.nextFloat() < randomGroupEntry.chance)) continue;
             return randomGroupEntry.generate(structureWorldAccess, chunkGenerator, random, blockPos);
         }

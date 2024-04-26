@@ -1,5 +1,6 @@
 package com.ineffa.wondrouswilds.world.features;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
@@ -14,13 +15,13 @@ import java.util.List;
 public class FeatureGroup {
 
     public static final Codec<FeatureGroup> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            PlacedFeature.REGISTRY_CODEC.listOf().fieldOf("features").forGetter(config -> config.features)
+            PlacedFeature.REGISTRY_CODEC.listOf().fieldOf("features").forGetter(featureGroup -> featureGroup.features)
     ).apply(instance, FeatureGroup::new));
 
-    public final List<RegistryEntry<PlacedFeature>> features;
+    public final ImmutableList<RegistryEntry<PlacedFeature>> features;
 
     public FeatureGroup(List<RegistryEntry<PlacedFeature>> features) {
-        this.features = features;
+        this.features = ImmutableList.copyOf(features);
     }
 
     public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos) {

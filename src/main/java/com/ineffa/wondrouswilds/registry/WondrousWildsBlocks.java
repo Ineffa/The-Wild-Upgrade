@@ -4,6 +4,7 @@ import com.ineffa.wondrouswilds.WondrousWilds;
 import com.ineffa.wondrouswilds.blocks.*;
 import com.ineffa.wondrouswilds.blocks.entity.NestBoxBlockEntity;
 import com.ineffa.wondrouswilds.blocks.entity.TreeHollowBlockEntity;
+import com.ineffa.wondrouswilds.mixin.FireBlockInvoker;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
@@ -28,11 +29,13 @@ public class WondrousWildsBlocks {
     public static final Block SMALL_POLYPORE = registerBlock("small_polypore", new SmallPolyporeBlock(FabricBlockSettings.of(Material.PLANT, MapColor.BROWN).sounds(BlockSoundGroup.GRASS).nonOpaque().breakInstantly().noCollision()));
     public static final Block BIG_POLYPORE = registerBlock("big_polypore", new BigPolyporeBlock(FabricBlockSettings.of(Material.PLANT, MapColor.BROWN).sounds(BlockSoundGroup.GRASS).nonOpaque().breakInstantly()));
 
+    public static final Block BUSH = registerBlock("bush", new FernBlock(AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).offsetType(AbstractBlock.OffsetType.XYZ)));
     public static final Block IVY = registerBlock("ivy", new IvyBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.LIME).noCollision().strength(0.2F).sounds(BlockSoundGroup.SMALL_DRIPLEAF)));
 
-    public static final Block YELLOW_BIRCH_LEAVES = registerBlock("yellow_birch_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES)));
-    public static final Block ORANGE_BIRCH_LEAVES = registerBlock("orange_birch_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES)));
-    public static final Block RED_BIRCH_LEAVES = registerBlock("red_birch_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES)));
+    public static final Block FALLEN_BIRCH_LEAVES = registerBlock("fallen_birch_leaves", new FallenLeavesBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.YELLOW).noCollision().strength(0.1F).sounds(BlockSoundGroup.GRASS)));
+    public static final Block YELLOW_BIRCH_LEAVES = registerBlock("yellow_birch_leaves", new SheddingLeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES), WondrousWildsParticles.BIRCH_LEAF, 8, 0.917647F, 0.694117F, 0.172549F));
+    public static final Block ORANGE_BIRCH_LEAVES = registerBlock("orange_birch_leaves", new SheddingLeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES), WondrousWildsParticles.BIRCH_LEAF, 8, 0.945098F, 0.509803F, 0.164705F));
+    public static final Block RED_BIRCH_LEAVES = registerBlock("red_birch_leaves", new SheddingLeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES), WondrousWildsParticles.BIRCH_LEAF, 8, 0.968627F, 0.254901F, 0.188235F));
 
     public static final Block DEAD_OAK_LOG = registerBlock("dead_oak_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
     public static final Block DEAD_SPRUCE_LOG = registerBlock("dead_spruce_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_LOG)));
@@ -114,7 +117,11 @@ public class WondrousWildsBlocks {
 
     public static void initialize() {
         BlockEntities.init();
+        registerStrippableBlocks();
+        registerFlammableBlocks();
+    }
 
+    private static void registerStrippableBlocks() {
         StrippableBlockRegistry.register(HOLLOW_OAK_LOG, HOLLOW_STRIPPED_OAK_LOG);
         StrippableBlockRegistry.register(HOLLOW_SPRUCE_LOG, HOLLOW_STRIPPED_SPRUCE_LOG);
         StrippableBlockRegistry.register(HOLLOW_BIRCH_LOG, HOLLOW_STRIPPED_BIRCH_LOG);
@@ -124,5 +131,72 @@ public class WondrousWildsBlocks {
         StrippableBlockRegistry.register(HOLLOW_MANGROVE_LOG, HOLLOW_STRIPPED_MANGROVE_LOG);
         StrippableBlockRegistry.register(HOLLOW_CRIMSON_STEM, HOLLOW_STRIPPED_CRIMSON_STEM);
         StrippableBlockRegistry.register(HOLLOW_WARPED_STEM, HOLLOW_STRIPPED_WARPED_STEM);
+    }
+
+    private static void registerFlammableBlocks() {
+        FireBlockInvoker fireBlock = (FireBlockInvoker) Blocks.FIRE;
+
+        fireBlock.invokeRegisterFlammableBlock(PURPLE_VIOLET, 60, 100);
+        fireBlock.invokeRegisterFlammableBlock(PINK_VIOLET, 60, 100);
+        fireBlock.invokeRegisterFlammableBlock(RED_VIOLET, 60, 100);
+        fireBlock.invokeRegisterFlammableBlock(WHITE_VIOLET, 60, 100);
+        fireBlock.invokeRegisterFlammableBlock(BUSH, 60, 100);
+
+        fireBlock.invokeRegisterFlammableBlock(IVY, 15, 100);
+
+        fireBlock.invokeRegisterFlammableBlock(FALLEN_BIRCH_LEAVES, 30, 60);
+        fireBlock.invokeRegisterFlammableBlock(YELLOW_BIRCH_LEAVES, 30, 60);
+        fireBlock.invokeRegisterFlammableBlock(ORANGE_BIRCH_LEAVES, 30, 60);
+        fireBlock.invokeRegisterFlammableBlock(RED_BIRCH_LEAVES, 30, 60);
+
+        fireBlock.invokeRegisterFlammableBlock(DEAD_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_SPRUCE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_BIRCH_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_JUNGLE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_ACACIA_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_DARK_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_MANGROVE_LOG, 5, 5);
+
+        fireBlock.invokeRegisterFlammableBlock(DEAD_OAK_WOOD, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_SPRUCE_WOOD, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_BIRCH_WOOD, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_JUNGLE_WOOD, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_ACACIA_WOOD, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_DARK_OAK_WOOD, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DEAD_MANGROVE_WOOD, 5, 5);
+
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_SPRUCE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_BIRCH_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_JUNGLE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_ACACIA_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DARK_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_MANGROVE_LOG, 5, 5);
+
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DEAD_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DEAD_SPRUCE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DEAD_BIRCH_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DEAD_JUNGLE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DEAD_ACACIA_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DEAD_DARK_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_DEAD_MANGROVE_LOG, 5, 5);
+
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_STRIPPED_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_STRIPPED_SPRUCE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_STRIPPED_BIRCH_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_STRIPPED_JUNGLE_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_STRIPPED_ACACIA_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_STRIPPED_DARK_OAK_LOG, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(HOLLOW_STRIPPED_MANGROVE_LOG, 5, 5);
+
+        fireBlock.invokeRegisterFlammableBlock(OAK_TREE_HOLLOW, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(SPRUCE_TREE_HOLLOW, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(BIRCH_TREE_HOLLOW, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(JUNGLE_TREE_HOLLOW, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(ACACIA_TREE_HOLLOW, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(DARK_OAK_TREE_HOLLOW, 5, 5);
+        fireBlock.invokeRegisterFlammableBlock(MANGROVE_TREE_HOLLOW, 5, 5);
+
+        fireBlock.invokeRegisterFlammableBlock(BIRCH_NEST_BOX, 5, 20);
     }
 }
