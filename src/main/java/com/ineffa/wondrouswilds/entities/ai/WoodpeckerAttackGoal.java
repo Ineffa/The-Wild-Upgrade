@@ -1,7 +1,7 @@
 package com.ineffa.wondrouswilds.entities.ai;
 
 import com.ineffa.wondrouswilds.entities.WoodpeckerEntity;
-import com.ineffa.wondrouswilds.mixin.MeleeAttackGoalAccessor;
+import com.ineffa.wondrouswilds.mixin.common.MeleeAttackGoalAccessor;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.attribute.EntityAttributes;

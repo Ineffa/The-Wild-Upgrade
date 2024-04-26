@@ -1,7 +1,7 @@
 package com.ineffa.wondrouswilds.items.recipes;
 
 import com.google.gson.JsonObject;
-import com.ineffa.wondrouswilds.mixin.ShapedRecipeInvoker;
+import com.ineffa.wondrouswilds.mixin.common.ShapedRecipeInvoker;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;

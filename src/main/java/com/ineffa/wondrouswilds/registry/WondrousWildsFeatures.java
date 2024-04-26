@@ -2,9 +2,9 @@ package com.ineffa.wondrouswilds.registry;
 
 import com.google.common.collect.ImmutableList;
 import com.ineffa.wondrouswilds.WondrousWilds;
-import com.ineffa.wondrouswilds.mixin.FoliagePlacerTypeInvoker;
-import com.ineffa.wondrouswilds.mixin.TreeDecoratorTypeInvoker;
-import com.ineffa.wondrouswilds.mixin.TrunkPlacerTypeInvoker;
+import com.ineffa.wondrouswilds.mixin.common.FoliagePlacerTypeInvoker;
+import com.ineffa.wondrouswilds.mixin.common.TreeDecoratorTypeInvoker;
+import com.ineffa.wondrouswilds.mixin.common.TrunkPlacerTypeInvoker;
 import com.ineffa.wondrouswilds.world.features.*;
 import com.ineffa.wondrouswilds.world.features.configs.*;
 import com.ineffa.wondrouswilds.world.features.trees.decorators.*;

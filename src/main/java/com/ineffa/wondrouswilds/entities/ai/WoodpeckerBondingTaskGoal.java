@@ -2,7 +2,7 @@ package com.ineffa.wondrouswilds.entities.ai;
 
 import com.ineffa.wondrouswilds.entities.CanBondWithWoodpecker;
 import com.ineffa.wondrouswilds.entities.WoodpeckerEntity;
-import com.ineffa.wondrouswilds.mixin.MoveToTargetPosGoalAccessor;
+import com.ineffa.wondrouswilds.mixin.common.MoveToTargetPosGoalAccessor;
 import com.ineffa.wondrouswilds.util.WondrousWildsUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ItemEntity;

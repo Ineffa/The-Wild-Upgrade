@@ -4,7 +4,7 @@ import com.ineffa.wondrouswilds.WondrousWilds;
 import com.ineffa.wondrouswilds.blocks.*;
 import com.ineffa.wondrouswilds.blocks.entity.NestBoxBlockEntity;
 import com.ineffa.wondrouswilds.blocks.entity.TreeHollowBlockEntity;
-import com.ineffa.wondrouswilds.mixin.FireBlockInvoker;
+import com.ineffa.wondrouswilds.mixin.common.FireBlockInvoker;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;

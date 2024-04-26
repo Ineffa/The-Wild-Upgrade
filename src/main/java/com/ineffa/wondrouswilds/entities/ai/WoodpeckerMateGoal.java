@@ -1,7 +1,7 @@
 package com.ineffa.wondrouswilds.entities.ai;
 
 import com.ineffa.wondrouswilds.entities.WoodpeckerEntity;
-import com.ineffa.wondrouswilds.mixin.AnimalMateGoalAccessor;
+import com.ineffa.wondrouswilds.mixin.common.AnimalMateGoalAccessor;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 
 public class WoodpeckerMateGoal extends AnimalMateGoal {

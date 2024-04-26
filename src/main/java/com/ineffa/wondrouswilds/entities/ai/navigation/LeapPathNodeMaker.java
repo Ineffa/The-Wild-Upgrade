@@ -1,7 +1,7 @@
 package com.ineffa.wondrouswilds.entities.ai.navigation;
 
 import com.ineffa.wondrouswilds.entities.LeapingMob;
-import com.ineffa.wondrouswilds.mixin.LandPathNodeMakerAccessor;
+import com.ineffa.wondrouswilds.mixin.common.LandPathNodeMakerAccessor;
 import net.minecraft.entity.ai.pathing.LandPathNodeMaker;
 import net.minecraft.entity.ai.pathing.PathNode;
 import net.minecraft.entity.ai.pathing.PathNodeType;

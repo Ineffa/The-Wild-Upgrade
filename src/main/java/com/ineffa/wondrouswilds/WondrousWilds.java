@@ -3,7 +3,7 @@ package com.ineffa.wondrouswilds;
 import com.ineffa.wondrouswilds.client.rendering.WondrousWildsColorProviders;
 import com.ineffa.wondrouswilds.config.WondrousWildsConfig;
 import com.ineffa.wondrouswilds.entities.ChipmunkEntity;
-import com.ineffa.wondrouswilds.mixin.MobEntityAccessor;
+import com.ineffa.wondrouswilds.mixin.common.MobEntityAccessor;
 import com.ineffa.wondrouswilds.registry.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
