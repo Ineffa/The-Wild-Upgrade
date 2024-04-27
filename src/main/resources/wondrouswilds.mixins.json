@@ -40,15 +40,15 @@
     "common.WorldMixin"
   ],
   "client": [
+    "client.ArmorStandEntityRendererMixin",
+    "client.BipedEntityRendererMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayNetworkHandlerMixin",
     "client.ClientWorldMixin",
     "client.EntityRenderDispatcherMixin",
-    "client.WorldRendererMixin",
-    "client.ArmorStandEntityRendererMixin",
-    "client.BipedEntityRendererMixin",
     "client.HeadFeatureRendererMixin",
-    "client.PlayerEntityRendererMixin"
+    "client.PlayerEntityRendererMixin",
+    "client.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
