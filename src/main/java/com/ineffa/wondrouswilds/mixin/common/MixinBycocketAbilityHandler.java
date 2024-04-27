@@ -42,7 +42,7 @@ public abstract class MixinBycocketAbilityHandler extends Entity implements CanS
     }
 
     @Override
-    public boolean canLandSharpshot() {
+    public boolean wondrouswilds$canLandSharpshot() {
         return this.getOwner() instanceof BycocketUser owner && owner.wondrouswilds$canSharpshotWith((ProjectileEntity) (Object) this);
     }
 
@@ -55,7 +55,7 @@ public abstract class MixinBycocketAbilityHandler extends Entity implements CanS
     }
 
     @Override
-    public void registerSharpshot() {
+    public void wondrouswilds$registerSharpshot() {
         this.hasRegisteredSharpshot = true;
 
         if (!this.getWorld().isClient()) {

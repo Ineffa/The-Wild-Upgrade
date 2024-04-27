@@ -19,7 +19,7 @@ public class ServerPlayerInteractionManagerMixin {
 
     @Inject(method = "interactBlock", at = @At(value = "FIELD", target = "Lnet/minecraft/advancement/criterion/Criteria;ITEM_USED_ON_BLOCK:Lnet/minecraft/advancement/criterion/ItemCriterion;", opcode = Opcodes.GETSTATIC, shift = At.Shift.AFTER))
     private void triggerWoodpeckerBondingComparison(ServerPlayerEntity player, World world, ItemStack stack, Hand hand, BlockHitResult hitResult, CallbackInfoReturnable<ActionResult> callback) {
-        if (player instanceof CanBondWithWoodpecker bondingPlayer && bondingPlayer.getComparingWoodpecker().isPresent())
-            bondingPlayer.tryWoodpeckerBondingWith(world.getBlockState(hitResult.getBlockPos()).getBlock(), hitResult.getBlockPos(), player.getStackInHand(hand).getItem());
+        if (player instanceof CanBondWithWoodpecker bondingPlayer && bondingPlayer.wondrouswilds$getComparingWoodpecker().isPresent())
+            bondingPlayer.wondrouswilds$tryWoodpeckerBondingWith(world.getBlockState(hitResult.getBlockPos()).getBlock(), hitResult.getBlockPos(), player.getStackInHand(hand).getItem());
     }
 }

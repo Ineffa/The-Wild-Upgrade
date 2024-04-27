@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface CanBondWithWoodpecker {
 
-    Optional<WoodpeckerEntity> getComparingWoodpecker();
+    Optional<WoodpeckerEntity> wondrouswilds$getComparingWoodpecker();
 
-    void setComparingWoodpecker(@Nullable WoodpeckerEntity woodpecker);
+    void wondrouswilds$setComparingWoodpecker(@Nullable WoodpeckerEntity woodpecker);
 
-    void tryWoodpeckerBondingWith(Block block, BlockPos pos, Item item);
+    void wondrouswilds$tryWoodpeckerBondingWith(Block block, BlockPos pos, Item item);
 
-    void stopComparingWithWoodpecker();
+    void wondrouswilds$stopComparingWithWoodpecker();
 }

@@ -27,7 +27,7 @@ public class ProjectileUtilMixin {
      */
     @Inject(method = "getEntityCollision(Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;F)Lnet/minecraft/util/hit/EntityHitResult;", at = @At("HEAD"), cancellable = true)
     private static void detectAndRegisterSharpshots(World world, Entity entity, Vec3d min, Vec3d max, Box box, Predicate<Entity> predicate, float f, CallbackInfoReturnable<@Nullable EntityHitResult> callback) {
-        CanSharpshot sharpshotProjectile = entity instanceof CanSharpshot canSharpshot && canSharpshot.canLandSharpshot() ? canSharpshot : null;
+        CanSharpshot sharpshotProjectile = entity instanceof CanSharpshot canSharpshot && canSharpshot.wondrouswilds$canLandSharpshot() ? canSharpshot : null;
         boolean registerSharpshot = false;
 
         double d = Double.MAX_VALUE;
@@ -42,7 +42,7 @@ public class ProjectileUtilMixin {
             if (sharpshotProjectile != null) registerSharpshot = impactedEntity instanceof CanTakeSharpshots nextValidSharpshotTarget && nextValidSharpshotTarget.wondrouswilds$isValidHeightForSharpshot(impactVec.get().getY());
         }
 
-        if (registerSharpshot) sharpshotProjectile.registerSharpshot();
+        if (registerSharpshot) sharpshotProjectile.wondrouswilds$registerSharpshot();
 
         callback.setReturnValue(impactedEntity == null ? null : new EntityHitResult(impactedEntity));
     }

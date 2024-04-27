@@ -200,6 +200,6 @@ public class WoodpeckerBondingTaskGoal extends MoveToTargetPosGoal {
     private boolean checkStatus() {
         WoodpeckerEntity.BondingTask.BondingTaskStatus status = this.bondingTask.getStatus();
         if (status == WoodpeckerEntity.BondingTask.BondingTaskStatus.WAITING) return true;
-        return status == WoodpeckerEntity.BondingTask.BondingTaskStatus.PLAYING && ((CanBondWithWoodpecker) this.bondingTarget).getComparingWoodpecker().isEmpty();
+        return status == WoodpeckerEntity.BondingTask.BondingTaskStatus.PLAYING && ((CanBondWithWoodpecker) this.bondingTarget).wondrouswilds$getComparingWoodpecker().isEmpty();
     }
 }

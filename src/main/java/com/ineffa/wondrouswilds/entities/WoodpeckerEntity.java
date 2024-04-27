@@ -607,7 +607,7 @@ public class WoodpeckerEntity extends FlyingAndWalkingAnimalEntity implements Bl
 
     public void setComparingWithBondingTarget(boolean comparing) {
         if (this.getBondingTarget() instanceof CanBondWithWoodpecker bondingTarget)
-            bondingTarget.setComparingWoodpecker(comparing ? this : null);
+            bondingTarget.wondrouswilds$setComparingWoodpecker(comparing ? this : null);
     }
 
     @Nullable

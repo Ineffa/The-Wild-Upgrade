@@ -2,9 +2,9 @@ package com.ineffa.wondrouswilds.entities.projectiles;
 
 public interface CanSharpshot {
 
-    boolean canLandSharpshot();
+    boolean wondrouswilds$canLandSharpshot();
 
     boolean wondrouswilds$hasRegisteredSharpshot();
 
-    void registerSharpshot();
+    void wondrouswilds$registerSharpshot();
 }

@@ -30,23 +30,23 @@ public class ServerPlayerEntityMixin implements CanBondWithWoodpecker {
     private int woodpeckerComparisonCount;
 
     @Override
-    public Optional<WoodpeckerEntity> getComparingWoodpecker() {
+    public Optional<WoodpeckerEntity> wondrouswilds$getComparingWoodpecker() {
         return Optional.ofNullable(this.comparingWoodpecker);
     }
 
     @Override
-    public void setComparingWoodpecker(@Nullable WoodpeckerEntity comparingWoodpecker) {
-        if (comparingWoodpecker == null) this.stopComparingWithWoodpecker();
+    public void wondrouswilds$setComparingWoodpecker(@Nullable WoodpeckerEntity comparingWoodpecker) {
+        if (comparingWoodpecker == null) this.wondrouswilds$stopComparingWithWoodpecker();
         else this.comparingWoodpecker = comparingWoodpecker;
     }
 
     @Override
-    public void tryWoodpeckerBondingWith(Block block, BlockPos pos, Item item) {
-        if (this.compareBlockInteractionWithWoodpecker(block, pos, item)) this.stopComparingWithWoodpecker();
+    public void wondrouswilds$tryWoodpeckerBondingWith(Block block, BlockPos pos, Item item) {
+        if (this.compareBlockInteractionWithWoodpecker(block, pos, item)) this.wondrouswilds$stopComparingWithWoodpecker();
     }
 
     @Override
-    public void stopComparingWithWoodpecker() {
+    public void wondrouswilds$stopComparingWithWoodpecker() {
         if (this.comparingWoodpecker != null) {
             WoodpeckerEntity.BondingTask currentWoodpeckerBondingTask = this.comparingWoodpecker.getCurrentBondingTask();
             if (currentWoodpeckerBondingTask != null) {
