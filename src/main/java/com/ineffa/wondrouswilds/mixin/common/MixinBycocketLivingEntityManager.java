@@ -23,12 +23,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
  * @author Ineffa
- * <p> Processes Bycocket abilities through living entities by controlling when they should trigger, and processing some effects of them when they do.
+ * <p> Manages most of the direct effects that Bycocket mechanics have on living entities, as well as conditions for them to occur.
  */
 @Mixin(LivingEntity.class)
-public abstract class MixinBycocketAbilityProcessor extends Entity implements BycocketUser, CanTakeSharpshots {
+public abstract class MixinBycocketLivingEntityManager extends Entity implements BycocketUser, CanTakeSharpshots {
 
-    private MixinBycocketAbilityProcessor(EntityType<?> type, World world) {
+    private MixinBycocketLivingEntityManager(EntityType<?> type, World world) {
         super(type, world);
     }
 
@@ -50,7 +50,8 @@ public abstract class MixinBycocketAbilityProcessor extends Entity implements By
 
     @Override
     public double wondrouswilds$getMaxVerticalDistanceForSharpshot() {
-        return this.getHeight() / 15.0D;
+        float height = this.getHeight();
+        return Math.max(height / 15.0D, Math.min(0.1D, height / 2.0D));
     }
 
     @Override
@@ -60,9 +61,6 @@ public abstract class MixinBycocketAbilityProcessor extends Entity implements By
         return y >= centerY - maxDistanceFromCenterY && y <= centerY + maxDistanceFromCenterY;
     }
 
-    /**
-     * Applies a multiplier to the damage taken from a projectile when it is landing a sharpshot.
-     */
     @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float applySharpshotDamageBonus(float damage, DamageSource source, float amount) {
         if (source.getSource() instanceof CanSharpshot sharpshotProjectile && sharpshotProjectile.wondrouswilds$hasRegisteredSharpshot())

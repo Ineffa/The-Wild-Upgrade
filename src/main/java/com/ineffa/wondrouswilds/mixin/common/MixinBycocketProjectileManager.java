@@ -18,21 +18,18 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
  * @author Ineffa
- * <p> Handles most of the triggering and application of Bycocket abilities through projectile entities.
+ * <p> Manages most of the direct effects that Bycocket mechanics have on projectile functionality, as well as conditions for them to occur.
  * <p> Sharpshot detection/registration is performed through {@link ProjectileUtilMixin#detectAndRegisterSharpshots}
  */
 @Mixin(ProjectileEntity.class)
-public abstract class MixinBycocketAbilityHandler extends Entity implements CanSharpshot {
+public abstract class MixinBycocketProjectileManager extends Entity implements CanSharpshot {
 
-    private MixinBycocketAbilityHandler(EntityType<?> type, World world) {
+    private MixinBycocketProjectileManager(EntityType<?> type, World world) {
         super(type, world);
     }
 
     @Shadow public abstract @Nullable Entity getOwner();
 
-    /**
-     * Cancels out any spread/inaccuracy being applied to a projectile that is shot by a Bycocket user, when possible.
-     */
     @ModifyVariable(method = "setVelocity(DDDFF)V", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     public float preventSpreadWithBycocket(float divergence) {
         if (this.getOwner() instanceof BycocketUser bycocketUser && bycocketUser.wondrouswilds$isAccurateWith((ProjectileEntity) (Object) this))
