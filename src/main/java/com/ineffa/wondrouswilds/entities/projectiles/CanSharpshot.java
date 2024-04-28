@@ -7,4 +7,6 @@ public interface CanSharpshot {
     boolean wondrouswilds$hasRegisteredSharpshot();
 
     void wondrouswilds$registerSharpshot();
+
+    void wondrouswilds$unregisterSharpshot();
 }

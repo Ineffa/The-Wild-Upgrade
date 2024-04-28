@@ -47,6 +47,8 @@ public class ProjectileUtilMixin {
             return;
         }
 
+        if (checkForSharpshot && sharpshotProjectile.wondrouswilds$hasRegisteredSharpshot()) sharpshotProjectile.wondrouswilds$unregisterSharpshot();
+
         if (impactVec != null && impactedEntity instanceof CanTakeSharpshots sharpshotTarget && sharpshotTarget.wondrouswilds$isValidHeightForSharpshot(impactVec.getY())) sharpshotProjectile.wondrouswilds$registerSharpshot();
 
         callback.setReturnValue(new EntityHitResult(impactedEntity));
