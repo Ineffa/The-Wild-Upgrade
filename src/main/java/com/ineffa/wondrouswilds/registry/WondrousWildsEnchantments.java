@@ -2,6 +2,7 @@ package com.ineffa.wondrouswilds.registry;
 
 import com.ineffa.wondrouswilds.WondrousWilds;
 import com.ineffa.wondrouswilds.enchantments.DexterityEnchantment;
+import com.ineffa.wondrouswilds.enchantments.OverchargeEnchantment;
 import com.ineffa.wondrouswilds.enchantments.VersatilityEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
@@ -11,6 +12,7 @@ public class WondrousWildsEnchantments {
 
     public static final Enchantment DEXTERITY = registerEnchantment("dexterity", new DexterityEnchantment());
     public static final Enchantment VERSATILITY = registerEnchantment("versatility", new VersatilityEnchantment());
+    public static final Enchantment OVERCHARGE = registerEnchantment("overcharge", new OverchargeEnchantment());
 
     private static Enchantment registerEnchantment(String name, Enchantment enchantment) {
         return Registry.register(Registry.ENCHANTMENT, new Identifier(WondrousWilds.MOD_ID, name), enchantment);

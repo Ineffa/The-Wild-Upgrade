@@ -17,12 +17,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class BycocketItem extends Item implements Wearable, IAnimatable {
+public class BycocketItem extends Item implements Wearable {
 
     public final Flair flair;
 
@@ -61,16 +57,6 @@ public class BycocketItem extends Item implements Wearable, IAnimatable {
     public SoundEvent getEquipSound() {
         return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
     }
-
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
-
-    @Override
-    public void registerControllers(AnimationData animationData) {}
 
     public enum Flair {
         WOODPECKER("woodpecker");

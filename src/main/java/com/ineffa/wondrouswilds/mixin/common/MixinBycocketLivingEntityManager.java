@@ -14,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,11 +33,34 @@ public abstract class MixinBycocketLivingEntityManager extends Entity implements
         super(type, world);
     }
 
-    @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot var1);
+    @Override
+    public int wondrouswilds$getOverchargeStartDelay() {
+        return 30;
+    }
+
+    @Override
+    public int wondrouswilds$getFullOverchargeThreshold() {
+        return this.wondrouswilds$getOverchargeStartDelay() + 30;
+    }
+
+    @Override
+    public boolean wondrouswilds$canOvercharge() {
+        return this.getActiveItem().isOf(Items.BOW) && EnchantmentHelper.getLevel(WondrousWildsEnchantments.OVERCHARGE, this.getEquippedStack(EquipmentSlot.HEAD)) > 0;
+    }
+
+    @Override
+    public boolean wondrouswilds$isOvercharging() {
+        return this.wondrouswilds$canOvercharge() && this.getItemUseTime() >= this.wondrouswilds$getOverchargeStartDelay();
+    }
+
+    @Override
+    public boolean wondrouswilds$isFullyOvercharged() {
+        return this.wondrouswilds$canOvercharge() && this.getItemUseTime() >= this.wondrouswilds$getFullOverchargeThreshold();
+    }
 
     @Override
     public boolean wondrouswilds$isAccurateWith(ProjectileEntity projectile) {
-        return false;
+        return this.wondrouswilds$isFullyOvercharged() && projectile.getType().isIn(WondrousWildsTags.EntityTypeTags.DEFAULT_BYCOCKET_PROJECTILES);
     }
 
     @Override
@@ -68,4 +92,8 @@ public abstract class MixinBycocketLivingEntityManager extends Entity implements
 
         return damage;
     }
+
+    @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot var1);
+    @Shadow public abstract int getItemUseTime();
+    @Shadow public abstract ItemStack getActiveItem();
 }

@@ -40,6 +40,7 @@
     "common.WorldMixin"
   ],
   "client": [
+    "client.AbstractClientPlayerEntityMixin",
     "client.ArmorStandEntityRendererMixin",
     "client.BipedEntityRendererMixin",
     "client.ClientPlayerEntityMixin",
@@ -47,6 +48,7 @@
     "client.ClientWorldMixin",
     "client.EntityRenderDispatcherMixin",
     "client.HeadFeatureRendererMixin",
+    "client.HeldItemRendererMixin",
     "client.PlayerEntityRendererMixin",
     "client.WorldRendererMixin"
   ],

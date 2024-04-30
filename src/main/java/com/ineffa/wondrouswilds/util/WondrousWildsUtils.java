@@ -146,4 +146,8 @@ public class WondrousWildsUtils {
     public static Direction getRandomHorizontalDirection(Random random) {
         return HORIZONTAL_DIRECTIONS[random.nextInt(HORIZONTAL_DIRECTIONS.length)];
     }
+
+    public static float normalizeValue(float value, float min, float max) {
+        return (value - min) / (max - min);
+    }
 }
