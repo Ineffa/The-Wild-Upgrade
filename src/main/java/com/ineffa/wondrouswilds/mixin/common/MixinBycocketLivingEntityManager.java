@@ -40,7 +40,7 @@ public abstract class MixinBycocketLivingEntityManager extends Entity implements
 
     @Override
     public int wondrouswilds$getFullOverchargeThreshold() {
-        return this.wondrouswilds$getOverchargeStartDelay() + 30;
+        return this.wondrouswilds$getOverchargeStartDelay() + 40;
     }
 
     @Override

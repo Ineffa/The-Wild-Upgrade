@@ -1,9 +1,9 @@
 package com.ineffa.wondrouswilds.mixin.common;
 
+import com.ineffa.wondrouswilds.enchantments.OverchargeEnchantment;
 import com.ineffa.wondrouswilds.entities.BycocketUser;
 import com.ineffa.wondrouswilds.entities.projectiles.CanSharpshot;
 import com.ineffa.wondrouswilds.registry.WondrousWildsParticles;
-import com.ineffa.wondrouswilds.util.WondrousWildsUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -31,12 +31,9 @@ public abstract class MixinBycocketProjectileManager extends Entity implements C
     }
 
     @ModifyVariable(method = "setVelocity(DDDFF)V", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-    public float amplifySpeedWithBycocket(float speed) {
-        if (this.getOwner() instanceof LivingEntity owner) {
-            BycocketUser bycocketUser = (BycocketUser) owner;
-            if (bycocketUser.wondrouswilds$isOvercharging())
-                return speed * Math.min(1.0F + WondrousWildsUtils.normalizeValue(owner.getItemUseTime(), bycocketUser.wondrouswilds$getOverchargeStartDelay(), bycocketUser.wondrouswilds$getFullOverchargeThreshold()), 2.0F);
-        }
+    public float amplifySpeedWithBycocketOvercharge(float speed) {
+        if (this.getOwner() instanceof LivingEntity owner && ((BycocketUser) owner).wondrouswilds$isOvercharging())
+            speed *= 1.0F + OverchargeEnchantment.getOverchargeProgress(owner);
 
         return speed;
     }

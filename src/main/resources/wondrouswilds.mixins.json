@@ -8,6 +8,7 @@
     "common.BirchSaplingGeneratorMixin",
     "common.BlocksMixin",
     "common.BodyControlMixin",
+    "common.BowItemMixin",
     "common.ComposterBlockInvoker",
     "common.EnchantmentHelperMixin",
     "common.EntityNavigationMixin",

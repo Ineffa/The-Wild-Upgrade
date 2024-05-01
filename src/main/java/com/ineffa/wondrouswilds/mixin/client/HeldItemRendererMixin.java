@@ -1,7 +1,7 @@
 package com.ineffa.wondrouswilds.mixin.client;
 
+import com.ineffa.wondrouswilds.enchantments.OverchargeEnchantment;
 import com.ineffa.wondrouswilds.entities.BycocketUser;
-import com.ineffa.wondrouswilds.util.WondrousWildsUtils;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.HeldItemRenderer;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class HeldItemRendererMixin {
 
     @Redirect(method = "renderFirstPersonItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;sin(F)F", ordinal = 4))
-    private float bycocketHandAnimations(float g, AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    private float bycocketOverchargeHandAnimations(float g, AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         float shakeMultiplier = 1.0F;
         float shakeSpeedMultiplier = 1.0F;
 
@@ -27,9 +27,9 @@ public class HeldItemRendererMixin {
             shakeSpeedMultiplier += 2.0F;
         }
         else if (bycocketUser.wondrouswilds$isOvercharging()) {
-            float concentrationProgress = WondrousWildsUtils.normalizeValue(player.getItemUseTime(), bycocketUser.wondrouswilds$getOverchargeStartDelay(), bycocketUser.wondrouswilds$getFullOverchargeThreshold());
-            shakeMultiplier += concentrationProgress * 0.2F;
-            shakeSpeedMultiplier += concentrationProgress * 0.6F;
+            float overchargeProgress = OverchargeEnchantment.getOverchargeProgress(player);
+            shakeMultiplier += overchargeProgress * 0.2F;
+            shakeSpeedMultiplier += overchargeProgress * 0.6F;
         }
 
         float m = (float) item.getMaxUseTime() - ((float) player.getItemUseTimeLeft() - tickDelta + 1.0F);
