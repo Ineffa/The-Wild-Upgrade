@@ -1,20 +1,18 @@
 package com.ineffa.wondrouswilds.client.rendering.entity.feature;
 
 import com.ineffa.wondrouswilds.WondrousWilds;
+import com.ineffa.wondrouswilds.client.rendering.WondrousWildsRenderLayers;
 import com.ineffa.wondrouswilds.items.BycocketItem;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.render.entity.model.ModelWithHead;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
@@ -35,14 +33,10 @@ public class BycocketFeatureRenderer<T extends LivingEntity, M extends EntityMod
         Identifier texture = new Identifier(WondrousWilds.MOD_ID, "textures/entity/bycocket/bycocket_" + bycocketItem.flair.name + ".png");
 
         matrixStack.push();
-        if (livingEntity.isBaby() && !(livingEntity instanceof VillagerEntity)) {
-            matrixStack.translate(0.0D, 0.03125D, 0.0D);
-            matrixStack.scale(0.7F, 0.7F, 0.7F);
-            matrixStack.translate(0.0D, 1.0D, 0.0D);
-        }
         this.getContextModel().copyStateTo(this.bycocketModel);
         ((ModelWithHead) this.getContextModel()).getHead().rotate(matrixStack);
-        this.bycocketModel.render(matrixStack, ItemRenderer.getArmorGlintConsumer(vertexConsumerProvider, RenderLayer.getEntityCutout(texture), false, itemStack.hasGlint()), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.bycocketModel.render(matrixStack, vertexConsumerProvider.getBuffer(WondrousWildsRenderLayers.getArmorCutoutCull(texture)), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+        if (itemStack.hasGlint()) this.bycocketModel.render(matrixStack, vertexConsumerProvider.getBuffer(WondrousWildsRenderLayers.ARMOR_ENTITY_GLINT_CULL), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStack.pop();
     }
 }

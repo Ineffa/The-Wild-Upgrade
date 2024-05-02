@@ -1,7 +1,7 @@
 package com.ineffa.wondrouswilds.client.rendering.entity;
 
 import com.ineffa.wondrouswilds.WondrousWilds;
-import com.ineffa.wondrouswilds.client.rendering.WondrousWildsRenderTypes;
+import com.ineffa.wondrouswilds.client.rendering.WondrousWildsRenderLayers;
 import com.ineffa.wondrouswilds.entities.FireflyEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -55,7 +55,7 @@ public class FireflyRenderer extends GeoEntityRenderer<FireflyEntity> {
 
         @Override
         public RenderLayer getRenderType(Identifier textureLocation) {
-            return WondrousWildsRenderTypes.getTranslucentGlow(textureLocation);
+            return WondrousWildsRenderLayers.getTranslucentGlow(textureLocation);
         }
     }
 }
