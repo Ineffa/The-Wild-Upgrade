@@ -3,7 +3,6 @@ package com.ineffa.wondrouswilds.registry;
 import com.ineffa.wondrouswilds.WondrousWilds;
 import com.ineffa.wondrouswilds.advancement.criteria.*;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.advancement.criterion.OnKilledCriterion;
 import net.minecraft.util.Identifier;
 
 public class WondrousWildsAdvancementCriteria {
@@ -12,7 +11,7 @@ public class WondrousWildsAdvancementCriteria {
     public static final GaveWoodpeckerItemCriterion GAVE_WOODPECKER_ITEM = Criteria.register(new GaveWoodpeckerItemCriterion());
     public static final CalledTenWoodpeckersIntoBattleCriterion CALLED_TEN_WOODPECKERS_INTO_BATTLE = Criteria.register(new CalledTenWoodpeckersIntoBattleCriterion());
     public static final CompanionKilledEntityCriterion COMPANION_KILLED_ENTITY = Criteria.register(new CompanionKilledEntityCriterion(createId("companion_killed_entity")));
-    public static final OnKilledCriterion KILLED_WITH_SHARPSHOT = Criteria.register(new OnKilledCriterion(createId("killed_with_sharpshot")));
+    public static final UsedBycocketFlairCriterion USED_BYCOCKET_FLAIR = Criteria.register(new UsedBycocketFlairCriterion());
 
     public static void initialize() {}
 

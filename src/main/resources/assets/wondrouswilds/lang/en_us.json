@@ -122,8 +122,8 @@
   "advancement.wondrouswilds.obtain_woodpecker_crest_feather.description": "Take a Woodpecker's shed crest feather",
   "advancement.wondrouswilds.obtain_nest_box.title": "Home Sweet Home",
   "advancement.wondrouswilds.obtain_nest_box.description": "Construct a Nest Box",
-  "advancement.wondrouswilds.kill_with_sharpshot.title": "Sharpshooter",
-  "advancement.wondrouswilds.kill_with_sharpshot.description": "Use a Bycocket to kill something with a sharpshot",
+  "advancement.wondrouswilds.use_bycocket_flair.title": "A Feather in Your Cap",
+  "advancement.wondrouswilds.use_bycocket_flair.description": "Successfully use the flair of a Bycocket",
 
   "subtitles.wondrouswilds.entity.woodpecker.chirp": "Woodpecker chirps",
   "subtitles.wondrouswilds.entity.woodpecker.drum": "Woodpecker drums",

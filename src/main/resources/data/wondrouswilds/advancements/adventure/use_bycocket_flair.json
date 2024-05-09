@@ -4,10 +4,10 @@
       "item": "wondrouswilds:bycocket_woodpecker"
     },
     "title": {
-      "translate": "advancement.wondrouswilds.kill_with_sharpshot.title"
+      "translate": "advancement.wondrouswilds.use_bycocket_flair.title"
     },
     "description": {
-      "translate": "advancement.wondrouswilds.kill_with_sharpshot.description"
+      "translate": "advancement.wondrouswilds.use_bycocket_flair.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,8 +16,8 @@
   },
   "parent": "minecraft:adventure/shoot_arrow",
   "criteria": {
-    "kill_with_sharpshot": {
-      "trigger": "wondrouswilds:killed_with_sharpshot"
+    "used_bycocket_flair": {
+      "trigger": "wondrouswilds:used_bycocket_flair"
     }
   }
 }
