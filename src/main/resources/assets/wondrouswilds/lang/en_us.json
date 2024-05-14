@@ -9,6 +9,12 @@
   "entity.wondrouswilds.chipmunk.start_sitting": "%1$s is now sitting",
 
   "effect.wondrouswilds.woodpeckers_warcry": "Woodpecker's Warcry",
+  "item.minecraft.potion.effect.haste": "Potion of Hastiness",
+  "item.minecraft.splash_potion.effect.haste": "Splash Potion of Hastiness",
+  "item.minecraft.lingering_potion.effect.haste": "Lingering Potion of Hastiness",
+  "item.minecraft.potion.effect.mining_fatigue": "Potion of Fatigue",
+  "item.minecraft.splash_potion.effect.mining_fatigue": "Splash Potion of Fatigue",
+  "item.minecraft.lingering_potion.effect.mining_fatigue": "Lingering Potion of Fatigue",
 
   "block.wondrouswilds.purple_violet": "Violet",
   "block.wondrouswilds.pink_violet": "Pink Violet",

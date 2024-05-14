@@ -15,7 +15,11 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
+import net.minecraft.potion.Potion;
+import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.util.Identifier;
@@ -26,6 +30,8 @@ import net.minecraft.village.TradeOffers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.minecraft.potion.Potions.AWKWARD;
 
 public class WondrousWildsItems {
 
@@ -137,6 +143,7 @@ public class WondrousWildsItems {
     }
 
     public static void initialize() {
+        Potions.initialize();
         registerDispenserBehaviors();
         registerCompostableItems();
         registerTrades();
@@ -175,9 +182,33 @@ public class WondrousWildsItems {
 
         Trades.addWandererTrade(false, 12, IVY, 1, 1);
 
-        //Trades.addWandererTrade(true, 1, SCROLL_OF_SECRETS_NEST_BOX, 1, 8, WOODPECKER_CREST_FEATHER, 10);
-
         Trades.initialize();
+    }
+
+    public static final class Potions {
+        public static final Potion HASTE = registerPotion("haste", new Potion(new StatusEffectInstance(StatusEffects.HASTE, 3600)));
+        public static final Potion LONG_HASTE = registerPotion("long_haste", new Potion("haste", new StatusEffectInstance(StatusEffects.HASTE, 9600)));
+        public static final Potion STRONG_HASTE = registerPotion("strong_haste", new Potion("haste", new StatusEffectInstance(StatusEffects.HASTE, 1800, 1)));
+
+        public static final Potion MINING_FATIGUE = registerPotion("mining_fatigue", new Potion(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 1800)));
+        public static final Potion LONG_MINING_FATIGUE = registerPotion("long_mining_fatigue", new Potion("mining_fatigue", new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 4800)));
+        public static final Potion STRONG_MINING_FATIGUE = registerPotion("strong_mining_fatigue", new Potion("mining_fatigue", new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 900, 1)));
+
+        private static Potion registerPotion(String name, Potion potion) {
+            return Registry.register(Registry.POTION, new Identifier(WondrousWilds.MOD_ID, name), potion);
+        }
+
+        private static void initialize() {
+            BrewingRecipeRegistry.registerPotionRecipe(AWKWARD, WOODPECKER_CREST_FEATHER, HASTE);
+            BrewingRecipeRegistry.registerPotionRecipe(HASTE, Items.REDSTONE, LONG_HASTE);
+            BrewingRecipeRegistry.registerPotionRecipe(HASTE, Items.GLOWSTONE_DUST, STRONG_HASTE);
+
+            BrewingRecipeRegistry.registerPotionRecipe(MINING_FATIGUE, Items.REDSTONE, LONG_MINING_FATIGUE);
+            BrewingRecipeRegistry.registerPotionRecipe(MINING_FATIGUE, Items.GLOWSTONE_DUST, STRONG_MINING_FATIGUE);
+            BrewingRecipeRegistry.registerPotionRecipe(HASTE, Items.FERMENTED_SPIDER_EYE, MINING_FATIGUE);
+            BrewingRecipeRegistry.registerPotionRecipe(LONG_HASTE, Items.FERMENTED_SPIDER_EYE, LONG_MINING_FATIGUE);
+            BrewingRecipeRegistry.registerPotionRecipe(STRONG_HASTE, Items.FERMENTED_SPIDER_EYE, STRONG_MINING_FATIGUE);
+        }
     }
 
     public static final class Trades {
