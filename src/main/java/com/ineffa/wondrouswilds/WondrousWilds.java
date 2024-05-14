@@ -41,21 +41,15 @@ public class WondrousWilds implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Wondrous Wilds initializing!");
-
 		// Initialize GeckoLib
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
 
 		// Initialize config
-		LOGGER.info("Initializing Wondrous Wilds config");
-
 		AutoConfig.register(WondrousWildsConfig.class, GsonConfigSerializer::new);
 		config = AutoConfig.getConfigHolder(WondrousWildsConfig.class).getConfig();
 
 		// Initialize mod
-		LOGGER.info("Initializing Wondrous Wilds content");
-
 		WondrousWildsSounds.initialize();
 		WondrousWildsParticles.initialize();
 
@@ -71,12 +65,11 @@ public class WondrousWilds implements ModInitializer {
 
 		WondrousWildsAdvancementCriteria.initialize();
 
-		upgradeBirchForests();
-		upgradeForest();
-
 		ServerEntityEvents.ENTITY_LOAD.register(WondrousWilds::hookEntityCreation);
 
-		LOGGER.info("Wondrous Wilds initialized and ready!");
+		// Register vanilla biome changes
+		upgradeBirchForests();
+		upgradeForest();
 	}
 
 	private static void upgradeBirchForests() {
