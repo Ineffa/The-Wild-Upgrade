@@ -11,6 +11,7 @@ public class WondrousWildsSounds {
     public static final SoundEvent WOODPECKER_DRUM = createSoundEvent("entity.woodpecker.drum");
 
     public static final SoundEvent MUSIC_OVERWORLD_BIRCH_FOREST = createSoundEvent("music.overworld.birch_forest");
+    public static final SoundEvent MUSIC_OVERWORLD_FOREST = createSoundEvent("music.overworld.forest");
     public static final SoundEvent MUSIC_DISC_AVIAN = createSoundEvent("music_disc.avian");
 
     private static SoundEvent createSoundEvent(String name) {

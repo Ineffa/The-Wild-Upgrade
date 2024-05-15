@@ -143,6 +143,8 @@ public class WondrousWilds implements ModInitializer {
 
 			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.PATCH_GRASS_FOREST.value());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FOREST_GRASS_PLACED.getKey().orElseThrow());
+
+			context.getEffects().setMusic(MusicType.createIngameMusic(WondrousWildsSounds.MUSIC_OVERWORLD_FOREST));
 		});
 
 		forestModifier.add(ModificationPhase.ADDITIONS, FOREST, context -> {
