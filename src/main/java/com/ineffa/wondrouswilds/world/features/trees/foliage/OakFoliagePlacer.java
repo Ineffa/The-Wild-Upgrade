@@ -13,8 +13,8 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 
 import static com.ineffa.wondrouswilds.util.WondrousWildsUtils.*;
@@ -35,7 +35,7 @@ public class OakFoliagePlacer extends FoliagePlacer {
     @Override
     protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         BlockPos.Mutable currentCenter = treeNode.getCenter().mutableCopy();
-        Set<BlockPos> leaves = new HashSet<>();
+        List<BlockPos> leaves = new ArrayList<>();
 
         leaves.add(currentCenter.toImmutable()); for (Direction direction : HORIZONTAL_DIRECTIONS) leaves.add(currentCenter.offset(direction));
 

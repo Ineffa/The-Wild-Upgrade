@@ -18,6 +18,7 @@
     "common.GoatHornItemMixin",
     "common.ItemStackMixin",
     "common.LandPathNodeMakerAccessor",
+    "common.LargeOakFoliagePlacerMixin",
     "common.LivingEntityMixin",
     "common.MeleeAttackGoalAccessor",
     "common.MixinBycocketLivingEntityManager",
