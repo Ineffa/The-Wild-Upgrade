@@ -20,8 +20,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class BodkinArrowEntity extends PersistentProjectileEntity implements BlockBreakingProjectile, HasCustomGravity {
 
