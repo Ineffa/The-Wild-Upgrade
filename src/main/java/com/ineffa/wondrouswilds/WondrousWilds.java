@@ -69,7 +69,7 @@ public class WondrousWilds implements ModInitializer {
 
 		// Register vanilla biome changes
 		upgradeBirchForests();
-		upgradeForest();
+		upgradeForests();
 	}
 
 	private static void upgradeBirchForests() {
@@ -133,28 +133,50 @@ public class WondrousWilds implements ModInitializer {
 		});
 	}
 
-	private static void upgradeForest() {
+	private static void upgradeForests() {
 		BiomeModification forestModifier = BiomeModifications.create(new Identifier(MOD_ID, "forest_modifier"));
 		final Predicate<BiomeSelectionContext> FOREST = BiomeSelectors.includeByKey(BiomeKeys.FOREST);
+		final Predicate<BiomeSelectionContext> FLOWER_FOREST = BiomeSelectors.includeByKey(BiomeKeys.FLOWER_FOREST);
+		final Predicate<BiomeSelectionContext> ALL_FORESTS = BiomeSelectors.includeByKey(BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST);
 
+		// All Forests
+		forestModifier.add(ModificationPhase.REPLACEMENTS, ALL_FORESTS, context -> {
+			context.getEffects().setMusic(MusicType.createIngameMusic(WondrousWildsSounds.MUSIC_OVERWORLD_FOREST));
+		});
+
+		forestModifier.add(ModificationPhase.ADDITIONS, ALL_FORESTS, context -> {
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, WondrousWildsFeatures.FOREST_BOULDER_PLACED.getKey().orElseThrow());
+		});
+
+		// Forest
 		forestModifier.add(ModificationPhase.REPLACEMENTS, FOREST, context -> {
 			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.TREES_BIRCH_AND_OAK.value());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.Trees.FOREST_TREES_PLACED.getKey().orElseThrow());
 
 			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.PATCH_GRASS_FOREST.value());
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FOREST_GRASS_PLACED.getKey().orElseThrow());
-
-			context.getEffects().setMusic(MusicType.createIngameMusic(WondrousWildsSounds.MUSIC_OVERWORLD_FOREST));
 		});
 
 		forestModifier.add(ModificationPhase.ADDITIONS, FOREST, context -> {
-			context.getGenerationSettings().addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, WondrousWildsFeatures.FOREST_BOULDER_PLACED.getKey().orElseThrow());
-
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, WondrousWildsFeatures.FOREST_COARSE_DIRT_SPLOTCH_PLACED.getKey().orElseThrow());
 
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FOREST_FALLEN_LOG_PLACED.getKey().orElseThrow());
 
 			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FOREST_BUSHES_PLACED.getKey().orElseThrow());
+		});
+
+		// Flower Forest
+		forestModifier.add(ModificationPhase.REPLACEMENTS, FLOWER_FOREST, context -> {
+			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.PATCH_GRASS_BADLANDS.value());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_GRASS_FOREST.getKey().orElseThrow());
+		});
+
+		forestModifier.add(ModificationPhase.ADDITIONS, FLOWER_FOREST, context -> {
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.UNDERGROUND_ORES, WondrousWildsFeatures.FLOWER_FOREST_COARSE_DIRT_SPLOTCH_PLACED.getKey().orElseThrow());
+
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FLOWER_FOREST_FALLEN_LOG_PLACED.getKey().orElseThrow());
+
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FLOWER_FOREST_BUSHES_PLACED.getKey().orElseThrow());
 		});
 	}
 
