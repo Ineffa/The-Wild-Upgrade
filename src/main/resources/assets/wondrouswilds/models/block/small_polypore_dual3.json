@@ -1,5 +1,5 @@
 {
-  "texture_size": [10, 16],
+  "texture_size": [16, 16],
   "textures": {
     "small_texture": "wondrouswilds:block/small_polypore",
     "medium_texture": "wondrouswilds:block/medium_polypore",
@@ -12,8 +12,8 @@
       "rotation": {"angle": -22.5, "axis": "x", "origin": [11, 10, 16]},
       "shade": false,
       "faces": {
-        "up": {"uv": [16, 8, 0, 0], "texture": "#small_texture"},
-        "down": {"uv": [16, 8, 0, 16], "texture": "#small_texture"}
+        "up": {"uv": [8, 7, 0, 0], "texture": "#small_texture"},
+        "down": {"uv": [8, 7, 0, 14], "texture": "#small_texture"}
       }
     },
     {
@@ -22,8 +22,8 @@
       "rotation": {"angle": -22.5, "axis": "x", "origin": [6, 6, 16]},
       "shade": false,
       "faces": {
-        "up": {"uv": [16, 8, 0, 0], "texture": "#medium_texture"},
-        "down": {"uv": [16, 8, 0, 16], "texture": "#medium_texture"}
+        "up": {"uv": [10, 8, 0, 0], "texture": "#medium_texture"},
+        "down": {"uv": [10, 8, 0, 16], "texture": "#medium_texture"}
       }
     }
   ]

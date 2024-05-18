@@ -1,5 +1,5 @@
 {
-	"texture_size": [10, 16],
+	"texture_size": [16, 16],
 	"textures": {
 		"medium_texture": "wondrouswilds:block/medium_polypore",
 		"particle": "#medium_texture"
@@ -11,8 +11,8 @@
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 12, 16]},
 			"shade": false,
 			"faces": {
-				"up": {"uv": [16, 8, 0, 0], "texture": "#medium_texture"},
-				"down": {"uv": [16, 8, 0, 16], "texture": "#medium_texture"}
+				"up": {"uv": [10, 8, 0, 0], "texture": "#medium_texture"},
+				"down": {"uv": [10, 8, 0, 16], "texture": "#medium_texture"}
 			}
 		},
 		{
@@ -21,8 +21,8 @@
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 8, 16]},
 			"shade": false,
 			"faces": {
-				"up": {"uv": [16, 8, 0, 0], "texture": "#medium_texture"},
-				"down": {"uv": [16, 8, 0, 16], "texture": "#medium_texture"}
+				"up": {"uv": [10, 8, 0, 0], "texture": "#medium_texture"},
+				"down": {"uv": [10, 8, 0, 16], "texture": "#medium_texture"}
 			}
 		},
 		{
@@ -31,8 +31,8 @@
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 4, 16]},
 			"shade": false,
 			"faces": {
-				"up": {"uv": [16, 8, 0, 0], "texture": "#medium_texture"},
-				"down": {"uv": [16, 8, 0, 16], "texture": "#medium_texture"}
+				"up": {"uv": [10, 8, 0, 0], "texture": "#medium_texture"},
+				"down": {"uv": [10, 8, 0, 16], "texture": "#medium_texture"}
 			}
 		}
 	]

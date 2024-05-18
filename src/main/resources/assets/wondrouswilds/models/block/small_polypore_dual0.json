@@ -1,29 +1,29 @@
 {
-	"texture_size": [8, 14],
-	"textures": {
-		"small_texture": "wondrouswilds:block/small_polypore",
-		"particle": "#small_texture"
-	},
-	"elements": [
-		{
-			"from": [1, 10, 9],
-			"to": [9, 10, 16],
-			"rotation": {"angle": -22.5, "axis": "x", "origin": [5, 10, 16]},
-			"shade": false,
-			"faces": {
-				"up": {"uv": [16, 8, 0, 0], "texture": "#small_texture"},
-				"down": {"uv": [16, 8, 0, 16], "texture": "#small_texture"}
-			}
-		},
-		{
-			"from": [7, 6, 9],
-			"to": [15, 6, 16],
-			"rotation": {"angle": -22.5, "axis": "x", "origin": [11, 6, 16]},
-			"shade": false,
-			"faces": {
-				"up": {"uv": [16, 8, 0, 0], "texture": "#small_texture"},
-				"down": {"uv": [16, 8, 0, 16], "texture": "#small_texture"}
-			}
-		}
-	]
+  "texture_size": [16, 16],
+  "textures": {
+    "small_texture": "wondrouswilds:block/small_polypore",
+    "particle": "#small_texture"
+  },
+  "elements": [
+    {
+      "from": [1, 10, 9],
+      "to": [9, 10, 16],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [5, 10, 16]},
+      "shade": false,
+      "faces": {
+        "up": {"uv": [8, 7, 0, 0], "texture": "#small_texture"},
+        "down": {"uv": [8, 7, 0, 14], "texture": "#small_texture"}
+      }
+    },
+    {
+      "from": [7, 6, 9],
+      "to": [15, 6, 16],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [11, 6, 16]},
+      "shade": false,
+      "faces": {
+        "up": {"uv": [8, 7, 0, 0], "texture": "#small_texture"},
+        "down": {"uv": [8, 7, 0, 14], "texture": "#small_texture"}
+      }
+    }
+  ]
 }
