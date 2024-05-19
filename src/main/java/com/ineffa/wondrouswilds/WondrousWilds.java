@@ -168,7 +168,7 @@ public class WondrousWilds implements ModInitializer {
 		// Flower Forest
 		forestModifier.add(ModificationPhase.REPLACEMENTS, FLOWER_FOREST, context -> {
 			context.getGenerationSettings().removeBuiltInFeature(VegetationPlacedFeatures.PATCH_GRASS_BADLANDS.value());
-			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_GRASS_FOREST.getKey().orElseThrow());
+			context.getGenerationSettings().addFeature(GenerationStep.Feature.VEGETAL_DECORATION, WondrousWildsFeatures.FLOWER_FOREST_GRASS_PLACED.getKey().orElseThrow());
 		});
 
 		forestModifier.add(ModificationPhase.ADDITIONS, FLOWER_FOREST, context -> {

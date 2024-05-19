@@ -322,6 +322,7 @@ public class WondrousWildsFeatures {
     public static final RegistryEntry<PlacedFeature> BIRCH_FOREST_GRASS_PLACED = registerPlaced("birch_forest_grass", VegetationConfiguredFeatures.PATCH_GRASS, VegetationPlacedFeatures.modifiers(8));
     public static final RegistryEntry<PlacedFeature> BIRCH_FOREST_TALL_GRASS_PLACED = PlacedFeatures.register("birch_forest_tall_grass", VegetationConfiguredFeatures.PATCH_TALL_GRASS, RarityFilterPlacementModifier.of(8), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
     public static final RegistryEntry<PlacedFeature> FOREST_GRASS_PLACED = registerPlaced("forest_grass", VegetationConfiguredFeatures.PATCH_GRASS, VegetationPlacedFeatures.modifiers(3));
+    public static final RegistryEntry<PlacedFeature> FLOWER_FOREST_GRASS_PLACED = registerPlaced("flower_forest_grass", VegetationConfiguredFeatures.PATCH_GRASS, VegetationPlacedFeatures.modifiers(2));
 
     public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> BUSHES_CONFIGURED = registerConfigured("bushes", Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(WondrousWildsBlocks.BUSH)), List.of(Blocks.GRASS_BLOCK)));
     public static final RegistryEntry<PlacedFeature> BIRCH_FOREST_BUSHES_PLACED = registerPlaced("birch_forest_bushes", BUSHES_CONFIGURED, RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP, BiomePlacementModifier.of());
