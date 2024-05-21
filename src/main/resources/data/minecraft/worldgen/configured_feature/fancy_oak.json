@@ -48,15 +48,6 @@
       "offset": 4,
       "height": 4
     },
-    "decorators": [
-      {
-        "type": "minecraft:beehive",
-        "probability": 0.02
-      },
-      {
-        "type": "minecraft:ivy",
-        "chance_to_generate": 0.03
-      }
-    ]
+    "decorators": []
   }
 }
