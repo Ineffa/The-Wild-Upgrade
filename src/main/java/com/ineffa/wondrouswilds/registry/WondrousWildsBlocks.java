@@ -32,7 +32,7 @@ public class WondrousWildsBlocks {
     public static final Block BUSH = registerBlock("bush", new FernBlock(AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).offsetType(AbstractBlock.OffsetType.XYZ)));
     public static final Block IVY = registerBlock("ivy", new IvyBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.LIME).noCollision().strength(0.2F).sounds(BlockSoundGroup.SMALL_DRIPLEAF)));
 
-    public static final Block FALLEN_BIRCH_LEAVES = registerBlock("fallen_birch_leaves", new FallenLeavesBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.YELLOW).noCollision().strength(0.1F).sounds(BlockSoundGroup.GRASS)));
+    public static final Block FALLEN_BIRCH_LEAVES = registerBlock("fallen_birch_leaves", new FallenLeavesBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.YELLOW).noCollision().strength(0.1F).sounds(BlockSoundGroup.GRASS).offsetType(AbstractBlock.OffsetType.XYZ)));
     public static final Block YELLOW_BIRCH_LEAVES = registerBlock("yellow_birch_leaves", new SheddingLeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES), WondrousWildsParticles.BIRCH_LEAF, 8, 0.917647F, 0.694117F, 0.172549F));
     public static final Block ORANGE_BIRCH_LEAVES = registerBlock("orange_birch_leaves", new SheddingLeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES), WondrousWildsParticles.BIRCH_LEAF, 8, 0.945098F, 0.509803F, 0.164705F));
     public static final Block RED_BIRCH_LEAVES = registerBlock("red_birch_leaves", new SheddingLeavesBlock(FabricBlockSettings.copyOf(Blocks.BIRCH_LEAVES), WondrousWildsParticles.BIRCH_LEAF, 8, 0.968627F, 0.254901F, 0.188235F));

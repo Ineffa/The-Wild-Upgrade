@@ -72,4 +72,14 @@ public class FallenLeavesBlock extends HorizontalFacingBlock {
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return hasTopRim(world, pos.down());
     }
+
+    @Override
+    public float getMaxHorizontalModelOffset() {
+        return 0.0F;
+    }
+
+    @Override
+    public float getVerticalModelOffsetMultiplier() {
+        return 0.001F;
+    }
 }
