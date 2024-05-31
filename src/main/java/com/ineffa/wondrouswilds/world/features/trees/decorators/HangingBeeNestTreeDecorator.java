@@ -18,7 +18,9 @@ import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ineffa.wondrouswilds.util.WondrousWildsUtils.HORIZONTAL_DIRECTIONS;
@@ -44,7 +46,7 @@ public class HangingBeeNestTreeDecorator extends TreeDecorator {
         for (BlockPos logPos : horizontalLogs) {
             BlockPos nestPos = logPos.down();
             if (generator.isAir(nestPos)) {
-                Set<Direction> suitableFacingDirections = new HashSet<>();
+                List<Direction> suitableFacingDirections = new ArrayList<>();
                 for (Direction direction : HORIZONTAL_DIRECTIONS) if (generator.isAir(nestPos.offset(direction))) suitableFacingDirections.add(direction);
 
                 Direction nestFacingDirection = Util.getRandom(!suitableFacingDirections.isEmpty() ? suitableFacingDirections.toArray(Direction[]::new) : HORIZONTAL_DIRECTIONS, random);

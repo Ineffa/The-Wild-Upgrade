@@ -12,8 +12,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FallenLogFeature extends Feature<FallenLogFeatureConfig> {
     private static final BlockState MOSS_CARPET_STATE = Blocks.MOSS_CARPET.getDefaultState();
@@ -31,8 +31,8 @@ public class FallenLogFeature extends Feature<FallenLogFeatureConfig> {
         int minLength = config.minLength;
         int maxLength = config.maxLength;
 
-        Set<BlockPos> logs = new HashSet<>();
-        Set<BlockPos> stumpLogs = new HashSet<>();
+        List<BlockPos> logs = new ArrayList<>();
+        List<BlockPos> stumpLogs = new ArrayList<>();
 
         int logLimit = random.nextBetween(minLength, maxLength);
         int nextPositiveOffsetDistance = 0;
@@ -67,8 +67,8 @@ public class FallenLogFeature extends Feature<FallenLogFeatureConfig> {
                 }
             }
 
-            if (axisDirection == Direction.AxisDirection.POSITIVE) ++nextPositiveOffsetDistance;
-            else if (axisDirection == Direction.AxisDirection.NEGATIVE) ++nextNegativeOffsetDistance;
+            if (nextOffsetDirection.getDirection() == Direction.AxisDirection.POSITIVE) ++nextPositiveOffsetDistance;
+            else if (nextOffsetDirection.getDirection() == Direction.AxisDirection.NEGATIVE) ++nextNegativeOffsetDistance;
         }
 
         if (logs.size() < minLength) return false;

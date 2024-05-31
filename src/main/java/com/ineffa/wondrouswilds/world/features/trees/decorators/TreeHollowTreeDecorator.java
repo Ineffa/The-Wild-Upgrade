@@ -17,10 +17,9 @@ import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static com.ineffa.wondrouswilds.util.WondrousWildsUtils.HORIZONTAL_DIRECTIONS;
 import static com.ineffa.wondrouswilds.util.WondrousWildsUtils.TREE_HOLLOW_MAP;
@@ -46,7 +45,7 @@ public class TreeHollowTreeDecorator extends TreeDecorator {
         BlockPos chosenLog = suitableLogs.get(random.nextInt(MathHelper.ceil(suitableLogs.size() / 3.0D)));
         if (chosenLog == null) return;
 
-        Set<Direction> suitableFacingDirections = new HashSet<>();
+        List<Direction> suitableFacingDirections = new ArrayList<>();
         for (Direction direction : HORIZONTAL_DIRECTIONS) if (generator.isAir(chosenLog.offset(direction))) suitableFacingDirections.add(direction);
 
         Direction facingDirection = Util.getRandom(!suitableFacingDirections.isEmpty() ? suitableFacingDirections.toArray(Direction[]::new) : HORIZONTAL_DIRECTIONS, random);

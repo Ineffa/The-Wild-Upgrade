@@ -32,7 +32,7 @@ public class WorldRendererMixin {
     private void render(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f positionMatrix, CallbackInfo callback) {
         BlockDamageHolder blockDamageHolder = (BlockDamageHolder) this.world;
         if (blockDamageHolder != null) {
-            for (Map.Entry<Long, BlockDamageInstance> blockDamageEntry : blockDamageHolder.getBlockDamageInstanceMap().entrySet()) {
+            for (Map.Entry<Long, BlockDamageInstance> blockDamageEntry : blockDamageHolder.wondrouswilds$getBlockDamageInstanceMap().entrySet()) {
                 BlockPos blockPos = BlockPos.fromLong(blockDamageEntry.getKey());
                 int damageStage = blockDamageEntry.getValue().getStage() - 1;
 

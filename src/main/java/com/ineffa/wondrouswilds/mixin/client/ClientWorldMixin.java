@@ -31,7 +31,7 @@ public abstract class ClientWorldMixin extends World implements BlockDamageHolde
     private final Map<Long, BlockDamageInstance> clientBlockDamageInstances = new HashMap<>();
 
     @Override
-    public Map<Long, BlockDamageInstance> getBlockDamageInstanceMap() {
+    public Map<Long, BlockDamageInstance> wondrouswilds$getBlockDamageInstanceMap() {
         return this.clientBlockDamageInstances;
     }
 

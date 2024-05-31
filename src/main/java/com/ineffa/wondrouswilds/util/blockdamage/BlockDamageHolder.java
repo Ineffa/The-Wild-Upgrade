@@ -7,20 +7,20 @@ import java.util.Map;
 
 public interface BlockDamageHolder {
 
-    Map<Long, BlockDamageInstance> getBlockDamageInstanceMap();
+    Map<Long, BlockDamageInstance> wondrouswilds$getBlockDamageInstanceMap();
 
     @Nullable
     default BlockDamageInstance getDamageAtPos(BlockPos pos) {
         long posLong = pos.asLong();
-        if (!this.getBlockDamageInstanceMap().containsKey(posLong)) return null;
-        return this.getBlockDamageInstanceMap().get(posLong);
+        if (!this.wondrouswilds$getBlockDamageInstanceMap().containsKey(posLong)) return null;
+        return this.wondrouswilds$getBlockDamageInstanceMap().get(posLong);
     }
 
     default void createOrOverwriteDamage(BlockDamageInstance damage) {
-        this.getBlockDamageInstanceMap().put(damage.getPos().asLong(), damage);
+        this.wondrouswilds$getBlockDamageInstanceMap().put(damage.getPos().asLong(), damage);
     }
 
     default void removeDamageAtPos(BlockPos pos) {
-        this.getBlockDamageInstanceMap().remove(pos.asLong());
+        this.wondrouswilds$getBlockDamageInstanceMap().remove(pos.asLong());
     }
 }

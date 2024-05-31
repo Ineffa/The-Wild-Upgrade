@@ -52,12 +52,6 @@ public class FallenLeavesBlock extends HorizontalFacingBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        /*return switch (state.get(DENSITY)) {
-            default -> SINGLE_VIOLET_SHAPE;
-            case 2 -> DOUBLE_VIOLET_SHAPE;
-            case 3 -> TRIPLE_VIOLET_SHAPE;
-            case 4 -> QUADRUPLE_VIOLET_SHAPE;
-        };*/
         return SHAPE;
     }
 

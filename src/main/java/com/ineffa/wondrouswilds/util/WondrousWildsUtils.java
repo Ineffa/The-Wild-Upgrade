@@ -37,12 +37,12 @@ public class WondrousWildsUtils {
             .put(Blocks.MANGROVE_LOG, WondrousWildsBlocks.MANGROVE_TREE_HOLLOW)
             .build();
 
-    public static Set<BlockPos> getCenteredCuboid(BlockPos center, int horizontalRadius) {
+    public static List<BlockPos> getCenteredCuboid(BlockPos center, int horizontalRadius) {
         return getCenteredCuboid(center, horizontalRadius, 0);
     }
 
-    public static Set<BlockPos> getCenteredCuboid(BlockPos center, int horizontalRadius, int verticalRadius) {
-        Set<BlockPos> positions = new HashSet<>();
+    public static List<BlockPos> getCenteredCuboid(BlockPos center, int horizontalRadius, int verticalRadius) {
+        List<BlockPos> positions = new ArrayList<>();
 
         for (int y = -verticalRadius; y <= verticalRadius; ++y) {
             for (int x = -horizontalRadius; x <= horizontalRadius; ++x) {
@@ -56,8 +56,8 @@ public class WondrousWildsUtils {
         return positions;
     }
 
-    public static Set<BlockPos> getEdges(BlockPos center, int edgeDistance, int edgeRadius) {
-        Set<BlockPos> positions = new HashSet<>();
+    public static List<BlockPos> getEdges(BlockPos center, int edgeDistance, int edgeRadius) {
+        List<BlockPos> positions = new ArrayList<>();
 
         for (Direction direction : HORIZONTAL_DIRECTIONS) {
             BlockPos offsetPos = center.offset(direction, edgeDistance);

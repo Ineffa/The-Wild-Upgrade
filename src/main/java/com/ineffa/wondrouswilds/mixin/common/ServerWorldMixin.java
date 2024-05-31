@@ -28,7 +28,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
@@ -43,7 +46,7 @@ public abstract class ServerWorldMixin extends World implements BlockDamageHolde
     private final Map<Long, BlockDamageInstance> serverBlockDamageInstances = new HashMap<>();
 
     @Override
-    public Map<Long, BlockDamageInstance> getBlockDamageInstanceMap() {
+    public Map<Long, BlockDamageInstance> wondrouswilds$getBlockDamageInstanceMap() {
         return this.serverBlockDamageInstances;
     }
 
@@ -100,9 +103,9 @@ public abstract class ServerWorldMixin extends World implements BlockDamageHolde
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;tickBlockEntities()V", shift = At.Shift.AFTER))
     private void tickBlockDamages(BooleanSupplier shouldKeepTicking, CallbackInfo callback) {
-        Set<BlockPos> positionsToTick = new HashSet<>();
-        this.getBlockDamageInstanceMap().values().forEach(blockDamageInstance -> positionsToTick.add(new BlockPos(blockDamageInstance.getPos())));
+        List<BlockPos> positionsToTick = new ArrayList<>();
+        this.wondrouswilds$getBlockDamageInstanceMap().values().forEach(blockDamageInstance -> positionsToTick.add(new BlockPos(blockDamageInstance.getPos())));
 
-        positionsToTick.forEach(pos -> ((ServerBlockDamageInstance) this.getBlockDamageInstanceMap().get(pos.asLong())).tick(this));
+        positionsToTick.forEach(pos -> ((ServerBlockDamageInstance) this.wondrouswilds$getBlockDamageInstanceMap().get(pos.asLong())).tick(this));
     }
 }

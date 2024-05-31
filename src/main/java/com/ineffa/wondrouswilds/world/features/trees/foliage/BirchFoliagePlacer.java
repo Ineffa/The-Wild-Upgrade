@@ -13,8 +13,8 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 
 import static com.ineffa.wondrouswilds.util.WondrousWildsUtils.*;
@@ -37,7 +37,7 @@ public class BirchFoliagePlacer extends FoliagePlacer {
         BlockPos origin = treeNode.getCenter();
         BlockPos.Mutable currentCenter = origin.mutableCopy();
 
-        Set<BlockPos> leaves = new HashSet<>();
+        List<BlockPos> leaves = new ArrayList<>();
 
         leaves.add(origin); for (Direction direction : HORIZONTAL_DIRECTIONS) leaves.add(origin.offset(direction));
 
