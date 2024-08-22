@@ -1,9 +1,9 @@
 package com.ineffa.wondrouswilds.mixin.common;
 
-import com.ineffa.wondrouswilds.entities.ChipmunkEntity;
 import com.ineffa.wondrouswilds.entities.WoodpeckerEntity;
+import com.ineffa.wondrouswilds.entities.ai.FoxTargetChipmunksGoal;
+import com.ineffa.wondrouswilds.entities.ai.FoxTargetWoodpeckersGoal;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FoxEntity;
@@ -18,8 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FoxEntity.class)
 public abstract class FoxEntityMixin extends AnimalEntity {
 
-    @Shadow public abstract FoxEntity.Type getFoxType();
-
     @Unique
     private Goal huntChipmunksGoal, huntWoodpeckersGoal;
 
@@ -29,8 +27,8 @@ public abstract class FoxEntityMixin extends AnimalEntity {
 
     @Inject(method = "initGoals", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/passive/FoxEntity;followChickenAndRabbitGoal:Lnet/minecraft/entity/ai/goal/Goal;", shift = At.Shift.AFTER))
     private void initializeNewGoals(CallbackInfo callback) {
-        this.huntChipmunksGoal = new ActiveTargetGoal<>(this, ChipmunkEntity.class, false, false);
-        this.huntWoodpeckersGoal = new ActiveTargetGoal<>(this, WoodpeckerEntity.class, 20, false, false, entity -> !((WoodpeckerEntity) entity).isFlying());
+        this.huntChipmunksGoal = new FoxTargetChipmunksGoal((FoxEntity) (Object) this, false, false);
+        this.huntWoodpeckersGoal = new FoxTargetWoodpeckersGoal((FoxEntity) (Object) this, 20, false, false, entity -> !((WoodpeckerEntity) entity).isFlying());
     }
 
     @Inject(method = "addTypeSpecificGoals", at = @At("TAIL"))
@@ -43,4 +41,6 @@ public abstract class FoxEntityMixin extends AnimalEntity {
         }
         this.targetSelector.add(7, this.huntWoodpeckersGoal);
     }
+
+    @Shadow public abstract FoxEntity.Type getFoxType();
 }
