@@ -9,6 +9,7 @@ import net.minecraft.util.registry.Registry;
 
 public class WondrousWildsStatusEffects {
 
+    public static final StatusEffect RUSH = registerStatusEffect("rush", new WondrousWildsStatusEffect(StatusEffectCategory.BENEFICIAL, 16741749));
     public static final StatusEffect WOODPECKERS_WARCRY = registerStatusEffect("woodpeckers_warcry", new WondrousWildsStatusEffect(StatusEffectCategory.BENEFICIAL, 15744060));
 
     private static StatusEffect registerStatusEffect(String name, StatusEffect statusEffect) {

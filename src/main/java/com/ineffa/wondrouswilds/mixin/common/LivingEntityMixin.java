@@ -4,14 +4,18 @@ import com.ineffa.wondrouswilds.entities.WoodpeckerEntity;
 import com.ineffa.wondrouswilds.entities.projectiles.BodkinArrowEntity;
 import com.ineffa.wondrouswilds.items.BycocketItem;
 import com.ineffa.wondrouswilds.registry.WondrousWildsEntities;
+import com.ineffa.wondrouswilds.registry.WondrousWildsStatusEffects;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -19,14 +23,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-
-    @Shadow public abstract int getArmor();
-    @Shadow public abstract double getAttributeValue(EntityAttribute attribute);
 
     @Unique
     private boolean hitByWoodpeckerDrumming;
@@ -78,4 +80,15 @@ public abstract class LivingEntityMixin extends Entity {
     private static void restrictBycocketEquipSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> callback) {
         if (stack.getItem() instanceof BycocketItem) callback.setReturnValue(EquipmentSlot.HEAD);
     }
+
+    @Inject(method = "tickItemStackUsage", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/LivingEntity;itemUseTimeLeft:I", shift = At.Shift.BEFORE))
+    private void rushEffectItemSpeedup(ItemStack stack, CallbackInfo callback) {
+        StatusEffectInstance rushEffect = this.getStatusEffect(WondrousWildsStatusEffects.RUSH);
+        if (rushEffect != null) this.itemUseTimeLeft = Math.max(1, this.itemUseTimeLeft - (rushEffect.getAmplifier() + 1));
+    }
+
+    @Shadow protected int itemUseTimeLeft;
+    @Shadow public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
+    @Shadow public abstract int getArmor();
+    @Shadow public abstract double getAttributeValue(EntityAttribute attribute);
 }
