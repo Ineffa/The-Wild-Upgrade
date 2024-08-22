@@ -36,22 +36,23 @@ public class BirchFoliagePlacer extends FoliagePlacer {
     protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         BlockPos origin = treeNode.getCenter();
         BlockPos.Mutable currentCenter = origin.mutableCopy();
-
         List<BlockPos> leaves = new ArrayList<>();
 
+        // Top layer
         leaves.add(origin); for (Direction direction : HORIZONTAL_DIRECTIONS) leaves.add(origin.offset(direction));
 
-        currentCenter.move(Direction.DOWN, 2);
-        leaves.addAll(getCenteredCuboid(currentCenter, 1, 1));
+        // Middle layers
+        boolean restrictBottomLayerSize = false;
 
-        int[] edgeSizes = {0, 0};
-        if (random.nextInt(edgeSizes.length + 1) != 0) edgeSizes[random.nextInt(2)] = 1;
-        for (int i = 0; i < 2; ++i) {
-            leaves.addAll(getEdges(currentCenter, 2, edgeSizes[i]));
-            currentCenter.move(Direction.DOWN);
+        final int middleLayers = random.nextBetween(3, 4);
+        for (int layerCount = 1; layerCount <= middleLayers; ++layerCount) {
+            leaves.addAll(getCenteredCuboid(currentCenter.move(Direction.DOWN), 1));
+            leaves.addAll(getEdges(currentCenter, 2, layerCount == 1 || (restrictBottomLayerSize = layerCount == middleLayers && random.nextBoolean()) ? 0 : 1));
         }
 
-        int bottomSize = random.nextInt(edgeSizes[1] == 0 ? 3 : 4);
+        // Bottom layer
+        currentCenter.move(Direction.DOWN);
+        final int bottomSize = 1 + (restrictBottomLayerSize ? 0 : random.nextInt(3));
         int bottomCurrentStage = 1;
         while (bottomCurrentStage <= bottomSize) {
             for (Direction direction : HORIZONTAL_DIRECTIONS) leaves.add(switch (bottomCurrentStage) {
@@ -62,6 +63,7 @@ public class BirchFoliagePlacer extends FoliagePlacer {
             ++bottomCurrentStage;
         }
 
+        // Placement
         for (BlockPos pos : leaves) placeFoliageBlock(world, replacer, random, config, pos);
     }
 

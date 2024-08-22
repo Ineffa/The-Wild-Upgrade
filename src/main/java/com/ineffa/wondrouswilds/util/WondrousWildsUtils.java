@@ -37,16 +37,16 @@ public class WondrousWildsUtils {
             .put(Blocks.MANGROVE_LOG, WondrousWildsBlocks.MANGROVE_TREE_HOLLOW)
             .build();
 
-    public static List<BlockPos> getCenteredCuboid(BlockPos center, int horizontalRadius) {
-        return getCenteredCuboid(center, horizontalRadius, 0);
+    public static List<BlockPos> getCenteredCuboid(BlockPos center, int width) {
+        return getCenteredCuboid(center, width, 0);
     }
 
-    public static List<BlockPos> getCenteredCuboid(BlockPos center, int horizontalRadius, int verticalRadius) {
+    public static List<BlockPos> getCenteredCuboid(BlockPos center, int width, int height) {
         List<BlockPos> positions = new ArrayList<>();
 
-        for (int y = -verticalRadius; y <= verticalRadius; ++y) {
-            for (int x = -horizontalRadius; x <= horizontalRadius; ++x) {
-                for (int z = -horizontalRadius; z <= horizontalRadius; ++z) {
+        for (int y = -height; y <= height; ++y) {
+            for (int x = -width; x <= width; ++x) {
+                for (int z = -width; z <= width; ++z) {
                     BlockPos pos = center.add(x, y, z);
                     positions.add(pos);
                 }
@@ -56,7 +56,7 @@ public class WondrousWildsUtils {
         return positions;
     }
 
-    public static List<BlockPos> getEdges(BlockPos center, int edgeDistance, int edgeRadius) {
+    public static List<BlockPos> getEdges(BlockPos center, int edgeDistance, int edgeLength) {
         List<BlockPos> positions = new ArrayList<>();
 
         for (Direction direction : HORIZONTAL_DIRECTIONS) {
@@ -64,9 +64,9 @@ public class WondrousWildsUtils {
 
             positions.add(offsetPos);
 
-            if (edgeRadius < 1) continue;
+            if (edgeLength < 1) continue;
 
-            for (int distance = 1; distance <= edgeRadius; ++distance) {
+            for (int distance = 1; distance <= edgeLength; ++distance) {
                 positions.add(offsetPos.offset(direction.rotateYClockwise(), distance));
                 positions.add(offsetPos.offset(direction.rotateYCounterclockwise(), distance));
             }
