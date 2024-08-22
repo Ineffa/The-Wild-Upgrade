@@ -6,17 +6,21 @@
 			"bones": {
 				"headConstant": {
 					"rotation": {
-						"vector": ["query.head_pitch", "query.head_yaw * 0.4", 0]
+						"vector": ["query.head_pitch * 0.525 + math.sin((query.anim_time - 1) * 128) * -0.2", "query.head_yaw * 0.463", 0]
 					}
 				},
 				"upperTailConstant": {
 					"rotation": {
-						"vector": [-20, 0, 0]
+						"vector": [
+							"-20 + math.cos(query.anim_time * 128) * -0.6 - math.min(0, query.head_pitch * 0.7) + 5 * -math.min(0, query.head_pitch * 0.01125)",
+							"query.head_yaw * -0.21",
+							"(query.head_yaw * -0.115) * -math.min(0, query.head_pitch * 0.0235)"
+						]
 					}
 				},
 				"lowerTailConstant": {
 					"rotation": {
-						"vector": [20, 0, 0]
+						"vector": ["20 + math.cos(query.anim_time * 128) * 0.6 - 5 * -math.min(0, query.head_pitch * 0.01125)", "query.head_yaw * 0.04", 0]
 					}
 				},
 				"rightBackFootConstant": {
@@ -33,6 +37,31 @@
 					},
 					"position": {
 						"vector": [0.25, 0, 0]
+					}
+				},
+				"bodyConstant": {
+					"rotation": {
+						"vector": ["math.min(0, query.head_pitch * 0.65)", "query.head_yaw * 0.21", 0]
+					}
+				},
+				"frontFeetConstant": {
+					"rotation": {
+						"vector": ["math.max(0, query.head_pitch * -0.65)", 0, 0]
+					},
+					"position": {
+						"vector": [
+							0,
+							"math.sin(query.anim_time * 128) * 0.014 * math.min(1, math.abs(query.head_pitch / 2))",
+							"math.sin(query.anim_time * 128) * -0.004 * math.min(1, math.abs(query.head_pitch / 2))"
+						]
+					}
+				},
+				"bodyFootlessConstant": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 128) * -0.27", 0, 0]
+					},
+					"position": {
+						"vector": [0, "-0.023 + math.cos(query.anim_time * 128) * 0.023", 0]
 					}
 				}
 			}
@@ -92,46 +121,62 @@
 			"bones": {
 				"bodyConstant": {
 					"rotation": {
-						"vector": [-70, 0, 0]
+						"vector": ["-70 + math.sin(query.anim_time * 128) * -0.39 - query.head_pitch * 0.07", "query.head_yaw * 0.2", 0]
 					},
 					"position": {
-						"vector": [0, -0.75, -0.5]
+						"vector": [0, "-0.76 + math.cos(query.anim_time * 128) * 0.016", -0.5]
 					}
 				},
 				"headConstant": {
 					"rotation": {
-						"vector": ["70 + query.head_pitch", 0, "query.head_yaw * 0.4"]
+						"vector": ["query.head_pitch * 0.725 + 70 + math.cos(query.anim_time * 128) * 0.26", 0, "query.head_yaw * 0.4"]
 					},
 					"position": {
-						"vector": [0, 0.5, -0.5]
+						"vector": [0, "1.1 - query.head_pitch * (0.026 * math.max(0, query.head_pitch * 0.024))", "-0.7 - query.head_pitch * 0.0187"]
 					}
 				},
 				"frontFeetConstant": {
 					"rotation": {
-						"vector": [40, 0, 0]
+						"vector": ["40 - math.sin((query.anim_time + 2) * 128) * 1.72", 0, 0]
 					},
 					"position": {
-						"vector": [0, 0, 0]
+						"vector": [0, 0, "query.head_pitch * (0.0096 * math.max(0, query.head_pitch * 0.0272))"]
 					}
 				},
 				"upperTailConstant": {
 					"rotation": {
-						"vector": [92.5, 0, 0]
+						"vector": ["92.5 + math.sin(query.anim_time * 180) * 1.2", "math.sin(query.anim_time * 70) * 1.6", "math.sin(query.anim_time * 40) * 2.1"]
 					}
 				},
 				"lowerTailConstant": {
 					"rotation": {
-						"vector": [45, 0, 0]
+						"vector": ["45 + math.cos(query.anim_time * 180) * -1.8", "math.cos(query.anim_time * 70) * -2.4", "math.cos(query.anim_time * 40) * -3"]
 					}
 				},
 				"rightBackFootConstant": {
 					"rotation": {
-						"vector": [0, 15, 0]
+						"vector": [0, "15 + math.max(0, query.head_yaw * 0.2)", 0]
+					},
+					"position": {
+						"vector": ["math.max(0, query.head_yaw * 0.005)", 0, "math.max(0, query.head_yaw * 0.005)"]
 					}
 				},
 				"leftBackFootConstant": {
 					"rotation": {
-						"vector": [0, -15, 0]
+						"vector": [0, "-15 + math.min(0, query.head_yaw * 0.2)", 0]
+					},
+					"position": {
+						"vector": ["math.min(0, query.head_yaw * 0.005)", 0, "-math.min(0, query.head_yaw * 0.005)"]
+					}
+				},
+				"bellyConstant": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"backFeetConstant": {
+					"rotation": {
+						"vector": [0, "query.head_yaw * 0.04", 0]
 					}
 				}
 			}
