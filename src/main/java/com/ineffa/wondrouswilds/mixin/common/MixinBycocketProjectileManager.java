@@ -4,10 +4,15 @@ import com.ineffa.wondrouswilds.enchantments.OverchargeEnchantment;
 import com.ineffa.wondrouswilds.entities.BycocketUser;
 import com.ineffa.wondrouswilds.entities.projectiles.CanSharpshot;
 import com.ineffa.wondrouswilds.registry.WondrousWildsAdvancementCriteria;
+import com.ineffa.wondrouswilds.registry.WondrousWildsEnchantments;
 import com.ineffa.wondrouswilds.registry.WondrousWildsParticles;
+import com.ineffa.wondrouswilds.registry.WondrousWildsStatusEffects;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -69,7 +74,17 @@ public abstract class MixinBycocketProjectileManager extends Entity implements C
             this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 2.0F);
             if (this.getWorld() instanceof ServerWorld serverWorld) serverWorld.spawnParticles(WondrousWildsParticles.SHARPSHOT_HIT, this.getX(), this.getY(), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 
-            if (this.getOwner() instanceof ServerPlayerEntity player) WondrousWildsAdvancementCriteria.USED_BYCOCKET_FLAIR.trigger(player);
+            if (this.getOwner() instanceof LivingEntity owner) {
+                int bedazzlementLevel = EnchantmentHelper.getLevel(WondrousWildsEnchantments.BEDAZZLEMENT, owner.getEquippedStack(EquipmentSlot.HEAD));
+                if (bedazzlementLevel > 0) {
+                    StatusEffectInstance existingRushEffect = owner.getStatusEffect(WondrousWildsStatusEffects.RUSH);
+                    int newRushEffectAmplifier = existingRushEffect == null ? 0 : Math.min(existingRushEffect.getAmplifier() + 1, bedazzlementLevel);
+                    owner.removeStatusEffect(WondrousWildsStatusEffects.RUSH);
+                    owner.addStatusEffect(new StatusEffectInstance(WondrousWildsStatusEffects.RUSH, Math.abs(180 - 60 * newRushEffectAmplifier) + Math.min(this.age, 400), newRushEffectAmplifier));
+                }
+
+                if (owner instanceof ServerPlayerEntity player) WondrousWildsAdvancementCriteria.USED_BYCOCKET_FLAIR.trigger(player);
+            }
         }
     }
 
